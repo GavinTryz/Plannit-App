@@ -12,6 +12,8 @@ target 'PlannitMobile' do
     :hermes_enabled => false
   )
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'PlannitMobileTests' do
     inherit! :complete
     # Pods for testing
