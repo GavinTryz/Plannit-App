@@ -27,12 +27,11 @@ export default function Register ({navigation}) {
                     'Content-Type' : 'application/json'
                 }
         })
-        .then ((response) => this.setState({error: response.data.error}))
+        .then ((response) => {setError(response.data.error)})
         .catch(function (error) {
             Promise.reject(new Error(error));
             console.log(error);
         });
-
     }
 
     const setResponseData = (e) => {
@@ -50,7 +49,7 @@ export default function Register ({navigation}) {
                     placeholder="john"
                     label="First Name"
                     value={firstname}
-                    onChangeText={firstname => this.setState({ firstname })}
+                    onChangeText={firstname => setFirstname(firstname)}
                     />
                 </View>
 
@@ -59,7 +58,7 @@ export default function Register ({navigation}) {
                     placeholder="doe"
                     label="Last Name"
                     value={lastname}
-                    onChangeText={lastname => this.setState({ lastname })}
+                    onChangeText={lastname => setLastname(lastname)}
                     />
                 </View>
               
@@ -68,7 +67,7 @@ export default function Register ({navigation}) {
                     placeholder="user@email.com"
                     label="Email"
                     value={email}
-                    onChangeText={email => this.setState({ email })}
+                    onChangeText={email => setEmail(email)}
                     />
                 </View>
 
@@ -78,7 +77,7 @@ export default function Register ({navigation}) {
                     placeholder="password"
                     label="Password"
                     value={password}
-                    onChangeText={password => this.setState({ password })}
+                    onChangeText={password => setPassword(password)}
                     />
                 </View>
 
@@ -87,14 +86,14 @@ export default function Register ({navigation}) {
                 </Text>
 
                 {!loading ?
-                    <Button onPress={this.register}> Register </Button>
+                    <Button onPress={register}> Register </Button>
                     :
                     <Loading size={'large'} />
                 }
 
             </View>
 
-            <TextLink onPress={navigation.navigate('Start', {showLogin: true})}>
+            <TextLink onPress={navigation.navigate('Start')}>
                 Already have an account? Log in!
             </TextLink>
         </View>

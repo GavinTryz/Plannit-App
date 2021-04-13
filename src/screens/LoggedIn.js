@@ -8,57 +8,40 @@ import NewEvent from './NewEvent';
 
 const AppNavigator = createStackNavigator();
 
-export default class LoggedIn extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          userID: -1,
-          firstname: "",
-          lastname: "",
-          showLogin: false
-        };
-      }
+export default function LoggedIn ({navigation}) {
+    const [userID, setUserID] = useState(-1);
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [showLogin, setShowlogin] = useState(false);
 
-    render() {
-        const { section, textStyle, buttonView, button } = styles; 
-        //const navigation = useNavigation();
+    const { section, textStyle, buttonView, button } = styles; 
+    //const navigation = useNavigation();
 
-        return (
-          <View style={section}>   
+    return (
+        <View style={section}>   
             <Text>
-                {"Hello " + this.props.firstname + ", this is your homepage. Below you may edit and view your events."}
+                {"Hello " + firstname + ", this is your homepage. Below you may edit and view your events."}
                 {"\n"}
             </Text>
             <Text style={textStyle}>
-                {this.props.userID},
-                {this.props.firstname},
-                {this.props.lastname},
+                {userID},
+                {firstname},
+                {lastname},
                 {"\n"}
             </Text>
             <View style={buttonView}>
-                <Button title="New Event" style={button} color="#485063" onPress={() => this.props.navigation.navigate('NewEvent')}/>
+                <Button title="New Event" style={button} color="#485063" onPress={() => navigation.navigate('NewEvent')}/>
                 <Text> {"\n"} </Text>
-                <Button title="List Events" style={button} color="#485063"/>
+                <Button title="List Events" style={button} color="#485063" onPress={() => navigation.navigate('ListEvents')}/>
                 <Text> {"\n"} </Text>
-                <Button title="My Typical Week" style={button} color="#485063"/>
+                <Button title="My Typical Week" style={button} color="#485063" onPress={() => navigation.navigate('MyWeek')}/>
                 <Text> {"\n"} </Text>
-                <Button title="Notifications" style={button} color="#485063"/>
+                <Button title="Notifications" style={button} color="#485063" onPress={() => navigation.navigate('Notifications')}/>
                 <Text> {"\n"} </Text>
             </View>
-          </View>
-        );
-    }
+        </View>
+    );
 }
-
-/*class NewEvent extends Component {
-    render() {
-        return(
-            <View>
-                <Text>This is the NewEvent page</Text>
-            </View>
-        );
-    }
-}*/
     
 const styles = {
     button: {
@@ -84,6 +67,3 @@ const styles = {
     color: 'red'
     }
 };
-    
-export { LoggedIn };
-//export default createAppContainer(AppNavigator);

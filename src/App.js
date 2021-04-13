@@ -3,12 +3,19 @@ import { Loading } from './components/common/';
 import Start from './screens/Start';
 import LoggedIn from './screens/LoggedIn';
 import jwt_decode from 'jwt-decode';
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import Register from './screens/Register'
-import Login from './screens/Login'
+import Register from './screens/Register';
+import Login from './screens/Login';
 
-const Stack = createStackNavigator()
+import { createStore } from 'redux';
+import allReducer from './reducers';
+import { Provider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+const store = createStore(allReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default function App() {
     const [userID, setUserID] = useState(-1);
@@ -24,33 +31,15 @@ export default function App() {
         setUserID(ud.userId);
     }
 
-    //<Start setJWT={setJWT}/>
-
-    if (!jwtToken) {
-        return (
+    return (
+        <Provider store={store}>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Start">
-                    <Stack.Screen
-                        component={Start}
-                        name="Start"
-                    />
-                    <Stack.Screen
-                        component={Register}
-                        name="Register"
-                    />
-                    <Stack.Screen
-                        component={Login}
-                        name="Login"
-                    />
+                <Stack.Navigator>
+                    <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Register" component={Register} />
                 </Stack.Navigator>
-                
             </NavigationContainer>  
-        );
-    } else {
-        return (
-            <NavigationContainer>
-                <LoggedIn userID={userID} jwtToken={jwtToken} firstname = {firstname} lastname = {lastname}/>
-            </NavigationContainer>
-        );
-    }
+        </Provider>
+    );
+
 }

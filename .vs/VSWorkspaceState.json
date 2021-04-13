@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\components",
-    "\\src\\components\\common",
     "\\src\\screens"
   ],
-  "SelectedNode": "\\src\\App.js",
+  "SelectedNode": "\\src\\reducers",
   "PreviewInSolutionExplorer": false
 }

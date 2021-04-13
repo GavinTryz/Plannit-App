@@ -20,11 +20,12 @@ export default function Start ({navigation}){
     }
 
     return(
+        //{setPage()}
         <View style={styles.container}>
             <Text style={{ fontSize: 40 }}>
                 {"Welcome to Plannit!\n\n"}
             </Text>
-            {setPage()}
+            
         </View>
     );
 }
