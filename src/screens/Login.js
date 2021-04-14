@@ -7,13 +7,13 @@ import axios from 'axios';
 import { Input, TextLink, Loading, Button } from '../components/common';
 
 export default function Login ({navigation}) {
-    const [userID,      setUserID]      = useState(-1);
-    const [email,       setEmail]       = useState('');
-    const [password,    setPassword]    = useState('');
-    const [error,       setError]       = useState('');
-    const [loading,     setLoading]     = useState(false);
-    //const [firstRun,    setFirstrun]    = useState(false);
-    const [jwtToken,    setJwtToken]    = useState(null);
+    const [userID,      setUserID]      = React.useState(-1);
+    const [email,       setEmail]       = React.useState('');
+    const [password,    setPassword]    = React.useState('');
+    const [error,       setError]       = React.useState('');
+    const [loading,     setLoading]     = React.useState(false);
+    //const [firstRun,    setFirstrun]    = React.useState(false);
+    const [jwtToken,    setJwtToken]    = React.useState(null);
 
     const RequestLogin = async () => {
         await axios

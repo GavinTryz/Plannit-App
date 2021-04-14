@@ -7,13 +7,13 @@ import axios from 'axios';
 import { Input, TextLink, Loading, Button } from '../components/common';
 
 export default function Register ({navigation}) {
-    const [userID,      setUserID]      = useState(-1);
-    const [firstname,   setFirstname]   = useState('');
-    const [lastname,    setLastname]    = useState('');
-    const [email,       setEmail]       = useState('');
-    const [password,    setPassword]    = useState('');
-    const [error,       setError]       = useState('');
-    const [loading,     setLoading]     = useState(false);
+    const [userID,      setUserID]      = React.useState(-1);
+    const [firstname,   setFirstname]   = React.useState('');
+    const [lastname,    setLastname]    = React.useState('');
+    const [email,       setEmail]       = React.useState('');
+    const [password,    setPassword]    = React.useState('');
+    const [error,       setError]       = React.useState('');
+    const [loading,     setLoading]     = React.useState(false);
 
     const register = async () => {
         await axios

@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import jwt_decode from 'jwt-decode';
 
@@ -9,18 +9,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Loading } from './components/common/';
 
-import Register from './screens/Register';
-import Login    from './screens/Login';
-import LoggedIn from './screens/LoggedIn';
+import Register      from './screens/Register';
+import Login         from './screens/Login';
+import LoggedIn      from './screens/LoggedIn';
+import NewEvent      from './screens/NewEvent';
+import ListEvents    from './screens/ListEvents';
+import Notifications from './screens/Notifications';
+import MyWeek        from './screens/MyWeek';
 
 const Stack = createStackNavigator();
 
-function App() {
-    const [userID,      setUserID]      = useState(-1);
-    const [firstname,   setFirstname]   = useState('');
-    const [lastname,    setLastname]    = useState('');
-    const [jwtToken,    setJwtToken]    = useState(null);
-    const [isSignedIn,  setIssignedin]  = useState(false)
+function App({navigation}) {
+    const [userID,      setUserID]      = React.useState(-1);
+    const [firstname,   setFirstname]   = React.useState('');
+    const [lastname,    setLastname]    = React.useState('');
+    const [jwtToken,    setJwtToken]    = React.useState(null);
+    //const [isSignedIn,  setIssignedin]  = React.useState(false)
+    const [firstRun,    setFirstrun]    = React.useState(true)
 
     const SetJWT = (jwtToken, userID) => {
         var ud = jwt_decode(jwtToken);
@@ -30,29 +35,60 @@ function App() {
         setUserID(      ud.userId);
     }
 
+    const readItemFromStorage = async () => {
+        setFirstname(AsyncStorage.getItem('firstName'));
+        setLastname(AsyncStorage.getItem('lastName'));
+        setJwtToken(AsyncStorage.getItem('jwtToken'));
+    };
+
+    const writeItemToStorage = async (first, last, jwt) => {
+        AsyncStorage.setItem('firstName',   first);
+        AsyncStorage.setItem('lastName',    last);
+        AsyncStorage.setItem('jwtToken',    jwt);
+    };
+
+    useEffect(() => {
+        writeItemToStorage("john", "doe", "jwt");
+        readItemFromStorage;
+    }, [])
+
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                { isSignedIn ? (
-                    <>
-                        <Stack.Screen 
-                            name="LoggedIn" 
-                            component={LoggedIn} 
-                        />
-                    </>
-                ) : (
-                    <>
-                        <Stack.Screen 
-                            name="Login" 
-                            component={Login} 
-                        />
-                        <Stack.Screen 
-                            name="Register" 
-                            component={Register} 
-                        />
-                    </>
-                )}  
-            </Stack.Navigator>
+            { jwtToken == null ? (
+                <Stack.Navigator initialRouteName = 'Home'>
+                    <Stack.Screen 
+                        name='Home' 
+                        component={LoggedIn} 
+                    />
+                    <Stack.Screen 
+                        name='New Event' 
+                        component={NewEvent} 
+                    />
+                    <Stack.Screen 
+                        name='List Events' 
+                        component={ListEvents} 
+                    />
+                    <Stack.Screen 
+                        name='My Typical Week' 
+                        component={MyWeek} 
+                    />
+                    <Stack.Screen 
+                        name='Notifications' 
+                        component={Notifications} 
+                    />
+                </Stack.Navigator>
+            ) : (
+                <Stack.Navigator>
+                    <Stack.Screen 
+                        name='Login'
+                        component={Login} 
+                    />
+                    <Stack.Screen 
+                        name='Register' 
+                        component={Register} 
+                    />
+                </Stack.Navigator>
+            )}  
         </NavigationContainer>  
     );
 }
