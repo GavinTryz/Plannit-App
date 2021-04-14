@@ -1,19 +1,20 @@
-import React, { Component, Fragment, useState } from 'react';
+import React, { Component, Fragment, useState, useEffect } from 'react';
 
 import { View, Text } from 'react-native';
 
 import axios from 'axios';
 
 import { Input, TextLink, Loading, Button } from '../components/common';
+import { App } from '../App';
 
 export default function Login ({navigation}) {
-    const [userID,      setUserID]      = React.useState(-1);
-    const [email,       setEmail]       = React.useState('');
-    const [password,    setPassword]    = React.useState('');
-    const [error,       setError]       = React.useState('');
-    const [loading,     setLoading]     = React.useState(false);
+    const [userID,      setUserID]      = useState(-1);
+    const [email,       setEmail]       = useState('');
+    const [password,    setPassword]    = useState('');
+    const [error,       setError]       = useState('');
+    const [loading,     setLoading]     = useState(false);
     //const [firstRun,    setFirstrun]    = React.useState(false);
-    const [jwtToken,    setJwtToken]    = React.useState(null);
+    const [jwtToken,    setJwtToken]    = useState(null);
 
     const RequestLogin = async () => {
         await axios
@@ -26,10 +27,11 @@ export default function Login ({navigation}) {
                 'Content-Type' : 'application/json'
             }
         })
-        .then((response) =>             
-            setError    (response.data.error),
-            setUserID   (response.data.userID),
-            setJwtToken (response.data.jwtToken),
+        .then((response) => {
+                setError    (response.data.error);
+                setUserID   (response.data.userID);
+                setJwtToken (response.data.jwtToken);
+            }
         )
         .catch(function (error) {
             Promise.reject(new Error(error));
@@ -37,8 +39,9 @@ export default function Login ({navigation}) {
         });
 
         //Navigate to App -> SetJWT (Store data here and call function?)
-        App.SetJWT(jwtToken)
-        navigation.navigate('LoggedIn')
+        //
+        //App.SetJWT(jwtToken)
+        //navigation.navigate('LoggedIn')
         //Navigate to LoggedIn
     }
 
@@ -76,7 +79,7 @@ export default function Login ({navigation}) {
                     <Loading size={'large'} />
                 }
             </View>
-            <TextLink onPress={navigation.navigate('Register')}>
+            <TextLink onPress={() => navigation.navigate('Register')}>
                 Don't have an account? Register!
             </TextLink>
         </View>

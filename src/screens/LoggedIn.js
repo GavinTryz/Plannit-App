@@ -3,6 +3,8 @@ import { View, Text, Button }   from 'react-native';
 
 import { NavigationContainer }  from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import 'react-native-gesture-handler';
 
@@ -48,7 +50,7 @@ export default function LoggedIn ({navigation}) {
                     title="New Event" 
                     style={button} 
                     color="#485063" 
-                    onPress={navigation.navigate('New Event')}
+                    onPress={() => navigation.navigate('New Event')}
                 />
                 <Text> {"\n"} </Text>
                 <Button 
