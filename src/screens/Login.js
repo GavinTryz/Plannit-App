@@ -1,24 +1,21 @@
 import React, { Component, Fragment, useState } from 'react';
+
 import { View, Text } from 'react-native';
-import { Input, TextLink, Loading, Button } from '../components/common';
+
 import axios from 'axios';
 
+import { Input, TextLink, Loading, Button } from '../components/common';
 
 export default function Login ({navigation}) {
-    const [userID, setUserID] = useState(-1);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [jwtToken, setJwtToken] = useState(null);
+    const [userID,      setUserID]      = useState(-1);
+    const [email,       setEmail]       = useState('');
+    const [password,    setPassword]    = useState('');
+    const [error,       setError]       = useState('');
+    const [loading,     setLoading]     = useState(false);
+    //const [firstRun,    setFirstrun]    = useState(false);
+    const [jwtToken,    setJwtToken]    = useState(null);
 
-    const responseIntake = (response) => {
-        
-    }
-
-    
     const login = async () => {
-        
         await axios
         .post('https://plannit-cop4331.herokuapp.com/api/login', {
             email: email,
@@ -29,26 +26,19 @@ export default function Login ({navigation}) {
                 'Content-Type' : 'application/json'
             }
         })
-        .then((response) => 
-            //this.setState({
-            //error: response.data.error,
-            //userID: response.data.userID,
-            //jwtToken: response.data.jwtToken
-            //})
-            
-            setError(response.data.error),
-            setUserID(response.data.userID),
-            setJwtToken(response.data.jwtToken),
+        .then((response) =>             
+            setError    (response.data.error),
+            setUserID   (response.data.userID),
+            setJwtToken (response.data.jwtToken),
         )
         .catch(function (error) {
             Promise.reject(new Error(error));
             console.log(error);
         });
 
-        //setJWT(jwtToken, userID);
-        
+        //Navigate to App -> SetJWT
+        //Navigate to LoggedIn
     }
-    
 
     const { form, section, errorTextStyle } = styles;
 
@@ -60,7 +50,7 @@ export default function Login ({navigation}) {
                     placeholder="user@email.com"
                     label="Email"
                     value={email}
-                    onChangeText={email => setEmail(email)}
+                    onChangeText={setEmail}
                     />
                 </View>
 
@@ -70,7 +60,7 @@ export default function Login ({navigation}) {
                     placeholder="password"
                     label="Password"
                     value={password}
-                    onChangeText={password => setPassword(password)}
+                    onChangeText={setPassword}
                     />
                 </View>
 
