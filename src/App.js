@@ -27,12 +27,12 @@ function App({navigation}) {
     //const [isSignedIn,  setIssignedin]  = React.useState(false)
     const [firstRun,    setFirstrun]    = React.useState(true)
 
-    const SetJWT = (jwtToken, userID) => {
-        var ud = jwt_decode(jwtToken);
-        setJwtToken(    jwtToken);
+    const SetJWT = (token, id) => {
+        var ud = jwt_decode(token);
+        setJwtToken(    token);
         setFirstname(   ud.firstName);
         setLastname(    ud.lastName);
-        setUserID(      ud.userId);
+        setUserID(      ud.userId);        
     }
 
     const readItemFromStorage = async () => {
@@ -54,7 +54,7 @@ function App({navigation}) {
 
     return (
         <NavigationContainer>
-            { jwtToken == null ? (
+            { jwtToken !== null ? (
                 <Stack.Navigator initialRouteName = 'Home'>
                     <Stack.Screen 
                         name='Home' 
@@ -78,7 +78,7 @@ function App({navigation}) {
                     />
                 </Stack.Navigator>
             ) : (
-                <Stack.Navigator>
+                <Stack.Navigator initialRouteName = 'Login'>
                     <Stack.Screen 
                         name='Login'
                         component={Login} 
