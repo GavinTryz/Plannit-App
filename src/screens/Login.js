@@ -15,11 +15,11 @@ export default function Login ({navigation}) {
     //const [firstRun,    setFirstrun]    = useState(false);
     const [jwtToken,    setJwtToken]    = useState(null);
 
-    const login = async () => {
+    const RequestLogin = async () => {
         await axios
         .post('https://plannit-cop4331.herokuapp.com/api/login', {
-            email: email,
-            password: password
+            email:      email,
+            password:   password
         },
         {
             headers: {
@@ -36,7 +36,9 @@ export default function Login ({navigation}) {
             console.log(error);
         });
 
-        //Navigate to App -> SetJWT
+        //Navigate to App -> SetJWT (Store data here and call function?)
+        App.SetJWT(jwtToken)
+        navigation.navigate('LoggedIn')
         //Navigate to LoggedIn
     }
 
@@ -47,20 +49,20 @@ export default function Login ({navigation}) {
             <View style={form}>
                 <View style={section}>
                     <Input
-                    placeholder="user@email.com"
-                    label="Email"
-                    value={email}
-                    onChangeText={setEmail}
+                        placeholder="user@email.com"
+                        label="Email"
+                        value={email}
+                        onChangeText={setEmail}
                     />
                 </View>
 
                 <View style={section}>
                     <Input
-                    secureTextEntry
-                    placeholder="password"
-                    label="Password"
-                    value={password}
-                    onChangeText={setPassword}
+                        secureTextEntry
+                        placeholder="password"
+                        label="Password"
+                        value={password}
+                        onChangeText={setPassword}
                     />
                 </View>
 
@@ -69,7 +71,7 @@ export default function Login ({navigation}) {
                 </Text>
 
                 {!loading ?
-                    <Button onPress={login}> Login </Button>
+                    <Button onPress={RequestLogin}> Login </Button>
                     :
                     <Loading size={'large'} />
                 }

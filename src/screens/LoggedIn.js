@@ -9,10 +9,10 @@ import 'react-native-gesture-handler';
 import NewEvent from './NewEvent';
 
 export default function LoggedIn ({navigation}) {
-    const [userID, setUserID] = useState(-1);
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [showLogin, setShowlogin] = useState(false);
+    const [userID,      setUserID]      = useState(-1);
+    const [firstname,   setFirstname]   = useState('');
+    const [lastname,    setLastname]    = useState('');
+    const [showLogin,   setShowlogin]   = useState(false);
 
     const { section, textStyle, buttonView, button } = styles; 
 

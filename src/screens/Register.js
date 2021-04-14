@@ -1,26 +1,28 @@
 import React, { Component, Fragment, useState } from 'react';
+
 import { View, Text } from 'react-native';
-import { Input, TextLink, Loading, Button } from '../components/common';
+
 import axios from 'axios';
-//import Start from '../screens/Start';
+
+import { Input, TextLink, Loading, Button } from '../components/common';
 
 export default function Register ({navigation}) {
-    const [userID, setUserID] = useState(-1);
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [userID,      setUserID]      = useState(-1);
+    const [firstname,   setFirstname]   = useState('');
+    const [lastname,    setLastname]    = useState('');
+    const [email,       setEmail]       = useState('');
+    const [password,    setPassword]    = useState('');
+    const [error,       setError]       = useState('');
+    const [loading,     setLoading]     = useState(false);
 
     const register = async () => {
         await axios
         .post('https://plannit-cop4331.herokuapp.com/api/register', 
             {
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            password: password
+            firstname:  firstname,
+            lastname:   lastname,
+            email:      email,
+            password:   password
             },
             {
                 headers: {
@@ -46,38 +48,38 @@ export default function Register ({navigation}) {
             <View style={form}>
                 <View style={section}>
                     <Input
-                    placeholder="john"
-                    label="First Name"
-                    value={firstname}
-                    onChangeText={firstname => setFirstname(firstname)}
+                        placeholder="john"
+                        label="First Name"
+                        value={firstname}
+                        onChangeText={setFirstname}
                     />
                 </View>
 
                 <View style={section}>
                     <Input
-                    placeholder="doe"
-                    label="Last Name"
-                    value={lastname}
-                    onChangeText={lastname => setLastname(lastname)}
+                        placeholder="doe"
+                        label="Last Name"
+                        value={lastname}
+                        onChangeText={setLastname}
                     />
                 </View>
               
                 <View style={section}>
                     <Input
-                    placeholder="user@email.com"
-                    label="Email"
-                    value={email}
-                    onChangeText={email => setEmail(email)}
+                        placeholder="user@email.com"
+                        label="Email"
+                        value={email}
+                        onChangeText={setEmail}
                     />
                 </View>
 
                 <View style={section}>
                     <Input
-                    secureTextEntry
-                    placeholder="password"
-                    label="Password"
-                    value={password}
-                    onChangeText={password => setPassword(password)}
+                        secureTextEntry
+                        placeholder="password"
+                        label="Password"
+                        value={password}
+                        onChangeText={setPassword}
                     />
                 </View>
 
@@ -93,7 +95,7 @@ export default function Register ({navigation}) {
 
             </View>
 
-            <TextLink onPress={navigation.navigate('Start')}>
+            <TextLink onPress={navigation.navigate('Login')}>
                 Already have an account? Log in!
             </TextLink>
         </View>

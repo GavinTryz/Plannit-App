@@ -9,7 +9,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Loading } from './components/common/';
 
-import Start    from './screens/Start';
 import Register from './screens/Register';
 import Login    from './screens/Login';
 import LoggedIn from './screens/LoggedIn';
@@ -21,7 +20,7 @@ function App() {
     const [firstname,   setFirstname]   = useState('');
     const [lastname,    setLastname]    = useState('');
     const [jwtToken,    setJwtToken]    = useState(null);
-    const [loggedIn,    setLoggedin]    = useState(false)
+    const [isSignedIn,  setIssignedin]  = useState(false)
 
     const SetJWT = (jwtToken, userID) => {
         var ud = jwt_decode(jwtToken);
@@ -34,12 +33,25 @@ function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {!loggedIn ? 
-                    <Stack.Screen name="Login"      component={Login} />
-                    <Stack.Screen name="Register"   component={Register} />
-                    :
-                    <Stack.Screen name="LoggedIn"   component={LoggedIn} />
-                }
+                { isSignedIn ? (
+                    <>
+                        <Stack.Screen 
+                            name="LoggedIn" 
+                            component={LoggedIn} 
+                        />
+                    </>
+                ) : (
+                    <>
+                        <Stack.Screen 
+                            name="Login" 
+                            component={Login} 
+                        />
+                        <Stack.Screen 
+                            name="Register" 
+                            component={Register} 
+                        />
+                    </>
+                )}  
             </Stack.Navigator>
         </NavigationContainer>  
     );
