@@ -1,8 +1,12 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
-
 import { View, Text } from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import axios from 'axios';
+
+import jwt_decode from 'jwt-decode';
+
 
 import { Input, TextLink, Loading, Button } from '../components/common';
 import { App } from '../App';
@@ -13,8 +17,7 @@ export default function Login ({navigation}) {
     const [password,    setPassword]    = useState('');
     const [error,       setError]       = useState('');
     const [loading,     setLoading]     = useState(false);
-    //const [firstRun,    setFirstrun]    = React.useState(false);
-    const [jwtToken,    setJwtToken]    = useState(null);
+    const [jwt,         setJwt]         = useState(null);
 
     const RequestLogin = async () => {
         await axios
@@ -30,26 +33,48 @@ export default function Login ({navigation}) {
         .then((response) => {
                 setError    (response.data.error);
                 setUserID   (response.data.userID);
-                setJwtToken (response.data.jwtToken);
+                setJwt      (response.data.jwt);
+                console.log("response.data.userID: " + response.data.userID); 
+
+                AsyncStorage.setItem('@jwt', response.data.jwt);
+
+                //var token = jwt_decode(response.data.jwt);
+                //AsyncStorage.setItem('@firstName', token.firstName);
+                //AsyncStorage.setItem('@lastName',  token.lastName);
+                //console.log("token.firstName: " + token.firstName);
+
+                if (response.data.userID != -1) {
+                    navigation.navigate('Home');
+                }
             }
         )
         .catch(function (error) {
             Promise.reject(new Error(error));
-            console.log(error);
+            console.log("Error: " + error);
         });
 
-        //Navigate to App -> SetJWT (Store data here and call function?)
-        //
-        //App.SetJWT(jwtToken)
-        //navigation.navigate('LoggedIn')
-        //Navigate to LoggedIn
+
+        /*
+        if (userID != -1) {
+            console.log("UserID: " + userID); 
+            navigation.navigate('Home');
+        }
+        */
+    }
+    
+    const decodeJWT = async (token) => {
+        //var token = jwt;
+        jwt_decode(token);
+
+        AsyncStorage.setItem('@firstName', JSON.stringify(token.firstName));
+        AsyncStorage.setItem('@lastName',  JSON.stringify(token.lastName));
     }
 
-    const { form, section, errorTextStyle } = styles;
+    const { form, section, errorTextStyle, centeredText } = styles;
 
     return (
-        <View>
-            <View style={form}>
+        <View style={form}>
+            <View>
                 <View style={section}>
                     <Input
                         placeholder="user@email.com"
@@ -79,18 +104,26 @@ export default function Login ({navigation}) {
                     <Loading size={'large'} />
                 }
             </View>
-            <TextLink onPress={() => navigation.navigate('Register')}>
-                Don't have an account? Register!
-            </TextLink>
+            <View style={centeredText}>
+                <TextLink onPress={() => navigation.navigate('Register')}>
+                    Don't have an account? Register!
+                </TextLink>
+            </View>
         </View>
     );
 }
 
 const styles = {
+    centeredText: {
+        textAlign: 'center',
+        alignItems: 'center',
+    },
     form: {
         width: '100%',
         borderTopWidth: 1,
         borderColor: '#ddd',
+        textAlign: 'center',
+        alignItems: 'stretch',
     },
     section: {
         flexDirection: 'row',

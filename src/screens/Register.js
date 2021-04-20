@@ -41,7 +41,7 @@ export default function Register ({navigation}) {
     }
 
 
-   const { form, section, errorTextStyle } = styles;
+   const { form, section, errorTextStyle, centeredText } = styles;
 
    return (
         <View>
@@ -95,14 +95,20 @@ export default function Register ({navigation}) {
 
             </View>
 
-            <TextLink onPress={() => navigation.navigate('Login')}>
-                Already have an account? Log in!
-            </TextLink>
+            <View style={centeredText}>
+                <TextLink onPress={() => navigation.navigate('Login')}>
+                    Already have an account? Log in!
+                </TextLink>
+            </View>
         </View>
    );
 }
 
 const styles = {
+    centeredText: {
+        textAlign: 'center',
+        alignItems: 'center',
+    },
     form: {
         width: '100%',
         borderTopWidth: 1,
