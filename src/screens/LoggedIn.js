@@ -10,43 +10,45 @@ import 'react-native-gesture-handler';
 
 import jwt_decode from 'jwt-decode';
 
+import styles from "../styles/styles"
+
 export default function LoggedIn ({navigation}) {
     const [userID,      setUserID]      = React.useState(-1);
     const [firstName,   setFirstname]   = React.useState('');
     const [lastName,    setLastname]    = React.useState('');
     const [showLogin,   setShowlogin]   = React.useState(false);
 
-    const { section, textStyle, buttonView, button } = styles; 
+    const { section_LoggedIn, textStyle, buttonView, button, welcomeMessage } = styles; 
 
     const retrieveInfo = async () => {
         setFirstname(AsyncStorage.getItem('@firstName'));
-        setLastname(AsyncStorage.getItem('@lastName'));
+        setLastname (AsyncStorage.getItem('@lastName'));
+        setUserID   (AsyncStorage.getItem('@userID'));
     }
 
     const decodeJWT = async () => {
-        var token = AsyncStorage.getItem('@jwt');
-        jwt_decode(token);
-        setFirstname(JSON.stringify(token.firstName));
-        setLastname(JSON.stringify(token.lastName));
-        console.log("First: " + JSON.stringify(firstName));
-        console.log("Last: "  + JSON.stringify(lastName));
+        var token = jwt_decode(await AsyncStorage.getItem('@jwt'));
+        setFirstname(token.firstName);
+        setLastname (token.lastName);
+        setUserID   (token.userId);
 
-        AsyncStorage.setItem('@firstName', JSON.stringify(firstName));
-        AsyncStorage.setItem('@lastName',  JSON.stringify(lastName));
+        await AsyncStorage.setItem('@firstName', firstName);
+        await AsyncStorage.setItem('@lastName',  lastName);
+        await AsyncStorage.setItem('@userID',    userID);
     }
 
     useEffect(() => {
-        retrieveInfo();
-        if (firstName == '' || firstName == undefined) {
+        //retrieveInfo();
+        //if (firstName == '' || firstName == undefined) {
             decodeJWT();
-        }        
+        //}        
         //writeItemToStorage("john", "doe", "jwt");
         //readItemFromStorage;
     }, []);
 
     return (
-        <View style={section}>   
-            <Text>
+        <View style={section_LoggedIn}>   
+            <Text style={welcomeMessage}>
                 {"Hello " + firstName + ", this is your homepage. Below you may edit and view your events."}
                 {"\n"}
             </Text>
@@ -86,28 +88,3 @@ export default function LoggedIn ({navigation}) {
         </View>
     );
 }
-    
-const styles = {
-    button: {
-        
-    },
-    buttonView: {
-        width: "50%", 
-        alignSelf: "center",
-    },
-    form: {
-        width: '100%',
-        borderTopWidth: 1,
-        borderColor: '#ddd',
-    },
-    section: {
-        borderBottomWidth: 1,
-        backgroundColor: '#fff',
-        borderColor: '#ddd',
-    },
-    textStyle: {
-        alignSelf: 'center',
-        fontSize: 18,
-        color: 'red'
-    }
-};

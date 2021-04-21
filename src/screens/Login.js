@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 
 import { Input, TextLink, Loading, Button } from '../components/common';
 import { App } from '../App';
+import styles from "../styles/styles"
 
 export default function Login ({navigation}) {
     const [userID,      setUserID]      = useState(-1);
@@ -33,19 +34,13 @@ export default function Login ({navigation}) {
         .then((response) => {
                 setError    (response.data.error);
                 setUserID   (response.data.userID);
-                setJwt      (response.data.jwt);
+                setJwt      (response.data.jwtToken);
                 console.log("response.data.userID: " + response.data.userID); 
-
-                AsyncStorage.setItem('@jwt', response.data.jwt);
 
                 //var token = jwt_decode(response.data.jwt);
                 //AsyncStorage.setItem('@firstName', token.firstName);
                 //AsyncStorage.setItem('@lastName',  token.lastName);
                 //console.log("token.firstName: " + token.firstName);
-
-                if (response.data.userID != -1) {
-                    navigation.navigate('Home');
-                }
             }
         )
         .catch(function (error) {
@@ -53,13 +48,13 @@ export default function Login ({navigation}) {
             console.log("Error: " + error);
         });
 
+        console.log("jwt: " + jwt);
+        await AsyncStorage.setItem('@jwt', jwt);
 
-        /*
         if (userID != -1) {
             console.log("UserID: " + userID); 
             navigation.navigate('Home');
         }
-        */
     }
     
     const decodeJWT = async (token) => {
@@ -112,28 +107,3 @@ export default function Login ({navigation}) {
         </View>
     );
 }
-
-const styles = {
-    centeredText: {
-        textAlign: 'center',
-        alignItems: 'center',
-    },
-    form: {
-        width: '100%',
-        borderTopWidth: 1,
-        borderColor: '#ddd',
-        textAlign: 'center',
-        alignItems: 'stretch',
-    },
-    section: {
-        flexDirection: 'row',
-        borderBottomWidth: 1,
-        backgroundColor: '#fff',
-        borderColor: '#ddd',
-    },
-    errorTextStyle: {
-        alignSelf: 'center',
-        fontSize: 18,
-        color: 'red'
-    }
-};
