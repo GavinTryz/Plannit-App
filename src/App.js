@@ -16,6 +16,7 @@ import NewEvent      from './screens/NewEvent';
 import ListEvents    from './screens/ListEvents';
 import Notifications from './screens/Notifications';
 import MyWeek        from './screens/MyWeek';
+import TestScreen    from './screens/TestScreen';
 
 const Stack = createStackNavigator();
 
@@ -54,9 +55,9 @@ function App({navigation}) {
     return (
         <NavigationContainer>
             { jwtToken !== null ? (
-                <Stack.Navigator initialRouteName = 'Home'>
+                <Stack.Navigator initialRouteName = 'My Events'>
                     <Stack.Screen 
-                        name='Home' 
+                        nname='My Events' // Previously called Home
                         component={LoggedIn} 
                     />
                     <Stack.Screen 
@@ -79,6 +80,10 @@ function App({navigation}) {
             ) : (
                 <Stack.Navigator initialRouteName = 'Login'>
                     <Stack.Screen 
+                        name='TestScreen'
+                        component={TestScreen} 
+                    />
+                    <Stack.Screen 
                         name='Login'
                         component={Login} 
                     />
@@ -87,7 +92,7 @@ function App({navigation}) {
                         component={Register} 
                     />
                     <Stack.Screen 
-                        name='Home' 
+                        name='My Events' // Previously called Home
                         component={LoggedIn} 
                     />
                     <Stack.Screen 

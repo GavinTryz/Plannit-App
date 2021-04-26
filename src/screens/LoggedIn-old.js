@@ -20,7 +20,7 @@ export default class LoggedIn extends React.Component {
       }
 
     render() {
-        const { section, textStyle, buttonView, button } = styles; 
+        const { section, redTextStyle, buttonView, button } = styles; 
         //const navigation = useNavigation();
 
         return (
@@ -29,7 +29,7 @@ export default class LoggedIn extends React.Component {
                 {"Hello " + this.props.firstname + ", this is your homepage. Below you may edit and view your events."}
                 {"\n"}
             </Text>
-            <Text style={textStyle}>
+            <Text style={redTextStyle}>
                 {this.props.userID},
                 {this.props.firstname},
                 {this.props.lastname},
@@ -78,7 +78,7 @@ const styles = {
     backgroundColor: '#fff',
     borderColor: '#ddd',
     },
-    textStyle: {
+    redTextStyle: {
     alignSelf: 'center',
     fontSize: 18,
     color: 'red'

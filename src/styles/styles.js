@@ -40,7 +40,7 @@ export default styles = StyleSheet.create({
         width: "50%", 
         alignSelf: "center",
     },
-    textStyle: {
+    redTextStyle: {
         alignSelf: 'center',
         fontSize: 18,
         color: 'red',
@@ -88,4 +88,16 @@ export default styles = StyleSheet.create({
     checkbox: {
 
     },
+    myEventListContainer: {
+		flex: 1,
+		//backgroundColor: '#fff',
+		paddingTop: 40,
+		paddingHorizontal: 20
+	},
+	myEventListTitle: {
+		marginTop: 24,
+		padding: 30,
+		backgroundColor: '#E5E5E5',
+		fontSize: 24
+	}
 })
