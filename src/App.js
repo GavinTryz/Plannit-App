@@ -17,6 +17,7 @@ import ListEvents    from './screens/ListEvents';
 import Notifications from './screens/Notifications';
 import MyWeek        from './screens/MyWeek';
 import TestScreen    from './screens/TestScreen';
+import ViewEvent     from './screens/ViewEvent';
 
 const Stack = createStackNavigator();
 
@@ -69,6 +70,10 @@ function App({navigation}) {
                         component={ListEvents} 
                     />
                     <Stack.Screen 
+                        name='View Event' 
+                        component={ViewEvent} 
+                    />
+                    <Stack.Screen 
                         name='My Typical Week' 
                         component={MyWeek} 
                     />
@@ -102,6 +107,10 @@ function App({navigation}) {
                     <Stack.Screen 
                         name='List Events' 
                         component={ListEvents} 
+                    />
+                    <Stack.Screen 
+                        name='View Event' 
+                        component={ViewEvent} 
                     />
                     <Stack.Screen 
                         name='My Typical Week' 

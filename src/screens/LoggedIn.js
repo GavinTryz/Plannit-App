@@ -1,6 +1,7 @@
 import React, { useEffect }     from 'react';
 import {useState} from "react";
 import { View, Text, Button, ScrollView, TouchableOpacity }   from 'react-native';
+import { Input } from '../components/common';
 
 import { NavigationContainer }  from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,6 +12,7 @@ import 'react-native-gesture-handler';
 import jwt_decode from 'jwt-decode';
 
 import styles from "../styles/styles"
+
 import { LongPressGestureHandler } from 'react-native-gesture-handler';
 
 export default function LoggedIn ({navigation}) {
@@ -18,8 +20,9 @@ export default function LoggedIn ({navigation}) {
     const [firstName,   setFirstname]   = React.useState('');
     const [lastName,    setLastname]    = React.useState('');
     const [showLogin,   setShowlogin]   = React.useState(false);
+    const [search,         setSearch]   = React.useState('');
 
-    const { section_LoggedIn, redTextStyle, buttonView, button, welcomeMessage } = styles; 
+    const { section_LoggedIn, redTextStyle, buttonView, button, welcomeMessage, section } = styles; 
 
     const retrieveInfo = async () => {
         setFirstname(AsyncStorage.getItem('@firstName'));
@@ -47,9 +50,10 @@ export default function LoggedIn ({navigation}) {
         //readItemFromStorage;
     }, []);
 
-    // Example list of events, for testing
+    // Example list of events, for testing.
+    // Have the API create something like this, filling eventName with the event name, and "key" with the event ID.
     const [people,setName]=useState([
-		{eventName:'Event', key:'123'}, // The id is the ID of each meeting
+		{eventName:'Event', key:'123'},
 		{eventName:'Another Event', key:'231'},
 		{eventName:'SomeNameOfAnEvent', key:'342'},
 		{eventName:'Anime Club', key:'4345'},
@@ -62,32 +66,33 @@ export default function LoggedIn ({navigation}) {
     return (
         <View style={section_LoggedIn}>   
             <ScrollView>
-                <Text style={welcomeMessage}>
+                <View style={section}>
+                    <Input
+                        placeholder="Event Name"
+                        label="Find"
+                        value={search}
+                        onChangeText={setSearch}
+                    />
+                </View>
+                {/* <Text style={welcomeMessage}>
                     {"Hello " + firstName + ", this is your homepage. Below you may edit and view your events."}
                     {"\n"}
-                </Text>
-                <Text style={redTextStyle}>
+                </Text> */}
+                {/* <Text style={redTextStyle}>
                     {"Debug: \nID: " + userID + "\nFName: " + firstName + " LName: " + lastName + "\n"}
-                </Text>
+                </Text> */}
 
-                
-                
-                
                 <View style={styles.myEventListContainer}>
                     { people.map((item) => {
                         return(
                             <View key={item.key}>
-                                <TouchableOpacity onPress={() => navigation.navigate('TestScreen', item)}>
+                                <TouchableOpacity onPress={() => navigation.navigate('View Event', item)}>
                                     <Text style = {styles.myEventListTitle}>{item.eventName}</Text>
                                 </TouchableOpacity>
                             </View>
                         )
                     })}
 		        </View>
-                
-                
-
-
 
                 <View style={buttonView}>
                     <Button 
@@ -120,6 +125,7 @@ export default function LoggedIn ({navigation}) {
                     <Text> {"\n"} </Text>
                 </View>
             </ScrollView>
+            
         </View>
     );
 }

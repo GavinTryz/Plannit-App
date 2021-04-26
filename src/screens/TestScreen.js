@@ -5,12 +5,11 @@ import axios from 'axios';
 
 import { Input, TextLink, Loading, Button } from './common';
 
-export default function TestScreen ({navigation, route}) {
-	const {eventName, key} = route.params;
+export default function TestScreen ({navigation}) {
 
 	return (
 		<View>
-			<Text>{"Display the event with the id: " + key + "\nThat is this event: " + eventName}</Text>
+			<Text>This is a test screen</Text>
 		</View>
 	);
 }
