@@ -21,7 +21,69 @@ export default function NewEvent ({navigation}) {
 	const [saturday,	setSaturday]	= useState(false);
 	const [sunday,		setSunday]		= useState(false);
 
-	const { form_full, section, errorTextStyle, section2, bordered, horizontalRow, checkbox } = styles;
+	const { form_full, section, errorTextStyle, section2, bordered, horizontalRow, checkbox , button, buttonView} = styles;
+
+	const CreateEvent = async () => {
+		var jwtToken = await AsyncStorage.getItem('@jwt');
+		var userID = jwt_decode(jwtToken).userId;
+
+		var daysOfWeek = [];
+
+		if (monday)
+		{
+			daysOfWeek.push("Monday");
+		}
+
+		if (tuesday)
+		{
+			daysOfWeek.push("Tuesday");
+		}
+		
+		if (wednesday)
+		{
+			daysOfWeek.push("Wednesday");
+		}
+		
+		if (thursday)
+		{
+			daysOfWeek.push("Thursday");
+		}
+		
+		if (friday)
+		{
+			daysOfWeek.push("Friday");
+		}
+		
+		if (saturday)
+		{
+			daysOfWeek.push("Saturday");
+		}
+
+		if (sunday)
+		{
+			daysOfWeek.push("Sunday");
+		}
+
+
+
+        var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/createEvent', {
+            creatorID: userID,
+			eventName: eventName,
+			startTime: startTime,
+			endTime: endTime,
+			weekly: weekly,
+			daysOfWeek: daysOfWeek,
+			jwtToken: jwtToken
+        });
+        
+        if (response.data.error) {
+            setError(response.data.error);
+        }
+        else
+        {
+			await AsyncStorage.setItem('@jwt', response.data.jwtToken);		
+        }
+    }
 
 	return (
 		<View style={form_full} >
@@ -255,6 +317,7 @@ export default function NewEvent ({navigation}) {
 					</View>
 				</View>
 			</View>
+			
 		</View>
 	);
 }
