@@ -30,6 +30,10 @@ export default function Login ({navigation}) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken); 
             navigation.navigate('Home');
         }
+        else
+        {
+            setError(response.data.error);
+        }
     }
     
     const decodeJWT = async (token) => {
