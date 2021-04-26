@@ -24,12 +24,8 @@ export default function Register ({navigation}) {
             lastname:   lastname,
             email:      email,
             password:   password
-            },
-            {
-                headers: {
-                    'Content-Type' : 'application/json'
-                }
-        })
+            }
+        )
         .then ((response) => {setError(response.data.error)})
         .catch(function (error) {
             Promise.reject(new Error(error));
@@ -96,17 +92,11 @@ export default function Register ({navigation}) {
 
             </View>
 
-<<<<<<< HEAD
-            <TextLink onPress={() => navigation.navigate('Login')}>
-                Already have an account? Log in!
-            </TextLink>
-=======
             <View style={centeredText}>
                 <TextLink onPress={() => navigation.navigate('Login')}>
                     Already have an account? Log in!
                 </TextLink>
             </View>
->>>>>>> 387060d7230166478b1d1e1d034366b05712b22b
         </View>
    );
 }

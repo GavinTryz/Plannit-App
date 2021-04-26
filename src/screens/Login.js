@@ -21,38 +21,13 @@ export default function Login ({navigation}) {
     const [jwt,         setJwt]         = useState(null);
 
     const RequestLogin = async () => {
-        await axios
-        .post('https://plannit-cop4331.herokuapp.com/api/login', {
+        var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/login', {
             email:      email,
             password:   password
-        },
-        {
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        })
-        .then((response) => {
-                setError    (response.data.error);
-                setUserID   (response.data.userID);
-                setJwt      (response.data.jwtToken);
-                console.log("response.data.userID: " + response.data.userID); 
-
-                //var token = jwt_decode(response.data.jwt);
-                //AsyncStorage.setItem('@firstName', token.firstName);
-                //AsyncStorage.setItem('@lastName',  token.lastName);
-                //console.log("token.firstName: " + token.firstName);
-            }
-        )
-        .catch(function (error) {
-            Promise.reject(new Error(error));
-            console.log("Error: " + error);
         });
-
-        console.log("jwt: " + jwt);
-        await AsyncStorage.setItem('@jwt', jwt);
-
-        if (userID != -1) {
-            console.log("UserID: " + userID); 
+        
+        if (response.data.jwtToken) {
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken); 
             navigation.navigate('Home');
         }
     }

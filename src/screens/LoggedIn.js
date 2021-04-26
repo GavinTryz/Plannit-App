@@ -5,9 +5,6 @@ import { NavigationContainer }  from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import 'react-native-gesture-handler';
 
 import jwt_decode from 'jwt-decode';
