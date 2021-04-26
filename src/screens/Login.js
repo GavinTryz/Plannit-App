@@ -83,6 +83,12 @@ export default function Login ({navigation}) {
                     Don't have an account? Register!
                 </TextLink>
             </View>
+
+            <View style={centeredText}>
+                <TextLink onPress={() => navigation.navigate('Send Reset')}>
+                    Forgot Password? Click here to reset your password
+                </TextLink>
+            </View>
         </View>
     );
 }

@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import jwt_decode from 'jwt-decode';
-
 import { NavigationContainer }  from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { Loading } from './components/common/';
-
 import Register      from './screens/Register';
 import Login         from './screens/Login';
+import SendReset     from './screens/SendReset';
+import ResetPassword from './screens/ResetPassword';
 import LoggedIn      from './screens/LoggedIn';
 import NewEvent      from './screens/NewEvent';
 import ListEvents    from './screens/ListEvents';
@@ -20,9 +16,6 @@ import MyWeek        from './screens/MyWeek';
 const Stack = createStackNavigator();
 
 function App({navigation}) {
-    const [userID,      setUserID]      = React.useState(-1);
-    const [firstname,   setFirstname]   = React.useState('');
-    const [lastname,    setLastname]    = React.useState('');
     const [jwtToken,    setJwtToken]    = React.useState(null);
     //const [firstRun,    setFirstrun]    = React.useState(true)
 
@@ -83,8 +76,16 @@ function App({navigation}) {
                         component={Login} 
                     />
                     <Stack.Screen 
-                        name='Register' 
+                        name='Register'
                         component={Register} 
+                    />
+                    <Stack.Screen 
+                        name='Send Reset' 
+                        component={SendReset} 
+                    />
+                    <Stack.Screen 
+                        name='Reset Password' 
+                        component={ResetPassword} 
                     />
                     <Stack.Screen 
                         name='Home' 
