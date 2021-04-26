@@ -24,10 +24,9 @@ function App({navigation}) {
     const [firstname,   setFirstname]   = React.useState('');
     const [lastname,    setLastname]    = React.useState('');
     const [jwtToken,    setJwtToken]    = React.useState(null);
-    //const [isSignedIn,  setIssignedin]  = React.useState(false)
-    const [firstRun,    setFirstrun]    = React.useState(true)
+    //const [firstRun,    setFirstrun]    = React.useState(true)
 
-    const SetJWT = (token, id) => {
+    /*const SetJWT = (token, id) => {
         var ud = jwt_decode(token);
         setJwtToken(    token);
         setFirstname(   ud.firstName);
@@ -36,21 +35,21 @@ function App({navigation}) {
     }
 
     const readItemFromStorage = async () => {
-        setFirstname(AsyncStorage.getItem('firstName'));
-        setLastname(AsyncStorage.getItem('lastName'));
-        setJwtToken(AsyncStorage.getItem('jwtToken'));
+        setFirstname(AsyncStorage.getItem('@firstName'));
+        setLastname(AsyncStorage.getItem('@lastName'));
+        setJwtToken(AsyncStorage.getItem('@jwtToken'));
     };
 
     const writeItemToStorage = async (first, last, jwt) => {
-        AsyncStorage.setItem('firstName',   first);
-        AsyncStorage.setItem('lastName',    last);
-        AsyncStorage.setItem('jwtToken',    jwt);
+        AsyncStorage.setItem('@firstName',   first);
+        AsyncStorage.setItem('@lastName',    last);
+        AsyncStorage.setItem('@jwtToken',    jwt);
     };
 
     useEffect(() => {
         writeItemToStorage("john", "doe", "jwt");
         readItemFromStorage;
-    }, [])
+    });*/
 
     return (
         <NavigationContainer>
@@ -86,6 +85,26 @@ function App({navigation}) {
                     <Stack.Screen 
                         name='Register' 
                         component={Register} 
+                    />
+                    <Stack.Screen 
+                        name='Home' 
+                        component={LoggedIn} 
+                    />
+                    <Stack.Screen 
+                        name='New Event' 
+                        component={NewEvent} 
+                    />
+                    <Stack.Screen 
+                        name='List Events' 
+                        component={ListEvents} 
+                    />
+                    <Stack.Screen 
+                        name='My Typical Week' 
+                        component={MyWeek} 
+                    />
+                    <Stack.Screen 
+                        name='Notifications' 
+                        component={Notifications} 
                     />
                 </Stack.Navigator>
             )}  

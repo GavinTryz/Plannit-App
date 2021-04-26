@@ -6,44 +6,56 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import 'react-native-gesture-handler';
+
+import jwt_decode from 'jwt-decode';
+
+import styles from "../styles/styles"
 
 export default function LoggedIn ({navigation}) {
     const [userID,      setUserID]      = React.useState(-1);
-    const [firstname,   setFirstname]   = React.useState('');
-    const [lastname,    setLastname]    = React.useState('');
+    const [firstName,   setFirstname]   = React.useState('');
+    const [lastName,    setLastname]    = React.useState('');
     const [showLogin,   setShowlogin]   = React.useState(false);
 
-    const { section, textStyle, buttonView, button } = styles; 
+    const { section_LoggedIn, textStyle, buttonView, button, welcomeMessage } = styles; 
 
-    const readItemFromStorage = async () => {
-        setFirstname(AsyncStorage.getItem('firstName'));
-        setLastname(AsyncStorage.getItem('lastName'));
-        setJwtToken(AsyncStorage.getItem('jwtToken'));
-    };
+    const retrieveInfo = async () => {
+        setFirstname(AsyncStorage.getItem('@firstName'));
+        setLastname (AsyncStorage.getItem('@lastName'));
+        setUserID   (AsyncStorage.getItem('@userID'));
+    }
 
-    const writeItemToStorage = async (first, last, jwt) => {
-        AsyncStorage.setItem('firstName',   first);
-        AsyncStorage.setItem('lastName',    last);
-        AsyncStorage.setItem('jwtToken',    jwt);
-    };
+    const decodeJWT = async () => {
+        var token = jwt_decode(await AsyncStorage.getItem('@jwt'));
+        setFirstname(token.firstName);
+        setLastname (token.lastName);
+        setUserID   (token.userId);
+
+        await AsyncStorage.setItem('@firstName', firstName);
+        await AsyncStorage.setItem('@lastName',  lastName);
+        await AsyncStorage.setItem('@userID',    userID);
+    }
 
     useEffect(() => {
-        writeItemToStorage("john", "doe", "jwt");
-        readItemFromStorage;
-    }, [])
+        //retrieveInfo();
+        //if (firstName == '' || firstName == undefined) {
+            decodeJWT();
+        //}        
+        //writeItemToStorage("john", "doe", "jwt");
+        //readItemFromStorage;
+    }, []);
 
     return (
-        <View style={section}>   
-            <Text>
-                {"Hello " + firstname + ", this is your homepage. Below you may edit and view your events."}
+        <View style={section_LoggedIn}>   
+            <Text style={welcomeMessage}>
+                {"Hello " + firstName + ", this is your homepage. Below you may edit and view your events."}
                 {"\n"}
             </Text>
             <Text style={textStyle}>
-                {userID},
-                {firstname},
-                {lastname},
-                {"\n"}
+                {userID + ", " + firstName + ", " + lastName + "\n"}
             </Text>
             <View style={buttonView}>
                 <Button 
@@ -78,28 +90,3 @@ export default function LoggedIn ({navigation}) {
         </View>
     );
 }
-    
-const styles = {
-    button: {
-        
-    },
-    buttonView: {
-        width: "50%", 
-        alignSelf: "center",
-    },
-    form: {
-        width: '100%',
-        borderTopWidth: 1,
-        borderColor: '#ddd',
-    },
-    section: {
-        borderBottomWidth: 1,
-        backgroundColor: '#fff',
-        borderColor: '#ddd',
-    },
-    textStyle: {
-        alignSelf: 'center',
-        fontSize: 18,
-        color: 'red'
-    }
-};

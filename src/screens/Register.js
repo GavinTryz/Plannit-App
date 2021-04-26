@@ -5,6 +5,7 @@ import { View, Text } from 'react-native';
 import axios from 'axios';
 
 import { Input, TextLink, Loading, Button } from '../components/common';
+import styles from "../styles/styles"
 
 export default function Register ({navigation}) {
     const [userID,      setUserID]      = useState(-1);
@@ -41,7 +42,7 @@ export default function Register ({navigation}) {
     }
 
 
-   const { form, section, errorTextStyle } = styles;
+   const { form, section, errorTextStyle, centeredText } = styles;
 
    return (
         <View>
@@ -95,33 +96,17 @@ export default function Register ({navigation}) {
 
             </View>
 
+<<<<<<< HEAD
             <TextLink onPress={() => navigation.navigate('Login')}>
                 Already have an account? Log in!
             </TextLink>
+=======
+            <View style={centeredText}>
+                <TextLink onPress={() => navigation.navigate('Login')}>
+                    Already have an account? Log in!
+                </TextLink>
+            </View>
+>>>>>>> 387060d7230166478b1d1e1d034366b05712b22b
         </View>
    );
 }
-
-const styles = {
-    form: {
-        width: '100%',
-        borderTopWidth: 1,
-        borderColor: '#ddd',
-    },
-    section: {
-        flexDirection: 'row',
-        borderBottomWidth: 1,
-        backgroundColor: '#fff',
-        borderColor: '#ddd',
-    },
-    errorTextStyle: {
-        alignSelf: 'center',
-        fontSize: 18,
-        color: 'red'
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems:'center'
-    }  
-};
