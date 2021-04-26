@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
     centeredText: {
@@ -60,32 +60,44 @@ export default styles = StyleSheet.create({
         backgroundColor: '#fff',
         //alignItems:'center',
         //justifyContent: 'center',
-        height: "80%",
+        //height: "100%",
         width: "80%",
         alignItems: 'stretch',
+        flex: 1,
     },
     form_full: {
         borderColor: '#ddd',
-        alignItems:'center',
+        alignItems: 'stretch',
         //justifyContent: 'center',
-        //flex: 1,
+        flex: 1,
+        backgroundColor: '#fff',
     },
     bordered: {
         borderColor: '#ddd',
         borderBottomWidth: 2,
         //borderTopWidth: 2,
         height: "12%",
-        alignItems: 'center',
-        textAlign: 'center',
+        width: "80%",
         justifyContent: 'center',
+        alignItems: 'center',
         
     }, 
     horizontalRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '50%',
+        width: '80%',
+        borderColor: '#ddd',
+        borderBottomWidth: 2,
     },
     checkbox: {
 
+    },
+    scrollview: {
+        alignItems: 'center',
+    },
+    picker: {
+        width: "80%",
+        borderColor: '#ddd',
+        borderBottomWidth: 2,
     },
 })
