@@ -32,22 +32,10 @@ export default function LoggedIn ({navigation}) {
         setUserID   (AsyncStorage.getItem('@userID'));
     }
 
-    const decodeJWT = async () => {
-        var token = jwt_decode(await AsyncStorage.getItem('@jwt'));
-        setFirstname(token.firstName);
-        setLastname (token.lastName);
-        setUserID   (token.userId);
-
-        await AsyncStorage.setItem('@firstName', token.firstName);
-        await AsyncStorage.setItem('@lastName',  token.lastName);
-        await AsyncStorage.setItem('@userID',    token.userId);
-    }
-
     const SearchEvents = async () => {
 		var jwtToken = await AsyncStorage.getItem('@jwt');
 		var userID = jwt_decode(jwtToken).userId;
 
-        console.log(search);
         var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/searchEvents', {
             userID:      userID,
             name:   search,
@@ -59,21 +47,10 @@ export default function LoggedIn ({navigation}) {
         }
         else
         {
-            console.log(response.data.creatorEvents);
-            console.log(response.data.participantEvents);
             await AsyncStorage.setItem('@jwt', response.data.jwtToken);
             setName(response.data.creatorEvents.concat(response.data.participantEvents));
         }
     }
-
-    useEffect(() => {
-        //retrieveInfo();
-        //if (firstName == '' || firstName == undefined) {
-            decodeJWT();
-        //}        
-        //writeItemToStorage("john", "doe", "jwt");
-        //readItemFromStorage;
-    }, []);
 
     // Example list of events, for testing.
     // Have the API create something like this, filling eventName with the event name, and "key" with the event ID.
