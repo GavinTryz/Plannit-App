@@ -82,6 +82,7 @@ export default function LoggedIn ({navigation}) {
     return (
         <View style={section_LoggedIn}>   
             <ScrollView>
+
                 <View style={section}>
                     <Input
                         placeholder="Event Name"
@@ -100,19 +101,8 @@ export default function LoggedIn ({navigation}) {
                     {"Debug: \nID: " + userID + "\nFName: " + firstName + " LName: " + lastName + "\n"}
                 </Text> */}
 
-                <View style={styles.myEventListContainer}>
-                    { people.map((item) => {
-                        return(
-                            <View key={item._id}>
-                                <TouchableOpacity onPress={() => navigation.navigate('View Event', item)}>
-                                    <Text style = {styles.myEventListTitle}>{item.eventName}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    })}
-		        </View>
-
                 <View style={buttonView}>
+                    <Text> {"\n"} </Text>
                     <Button 
                         title="New Event" 
                         style={button} 
@@ -140,8 +130,20 @@ export default function LoggedIn ({navigation}) {
                         color="#485063" 
                         onPress={() => navigation.navigate('Notifications')}
                     />
-                    <Text> {"\n"} </Text>
                 </View>
+
+                <View style={styles.myEventListContainer}>
+                    { people.map((item) => {
+                        return(
+                            <View key={item._id}>
+                                <TouchableOpacity onPress={() => navigation.navigate('View Event', item)}>
+                                    <Text style = {styles.myEventListTitle}>{item.eventName}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    })}
+		        </View>
+
             </ScrollView>
             
         </View>

@@ -58,7 +58,7 @@ function App({navigation}) {
             { jwtToken !== null ? (
                 <Stack.Navigator initialRouteName = 'My Events'>
                     <Stack.Screen 
-                        nname='My Events' // Previously called Home
+                        name='My Events' // Previously called Home
                         component={LoggedIn} 
                     />
                     <Stack.Screen 
