@@ -27,12 +27,16 @@ export default function MyWeek ({navigation}) {
 			jwtToken: jwtToken
         });
         
+		if (response.data.jwtToken)
+        {
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
+        }
+
         if (response.data.error) {
             setError(response.data.error);
         }
         else
         {
-			await AsyncStorage.setItem('@jwt', response.data.jwtToken);
 			setNames(response.data.names);
 			setWeek(response.data.week);		
         }
@@ -49,12 +53,13 @@ export default function MyWeek ({navigation}) {
 			jwtToken: jwtToken
         });
         
+		if (response.data.jwtToken)
+        {
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
+        }
+
         if (response.data.error) {
             setError(response.data.error);
-        }
-        else
-        {
-			await AsyncStorage.setItem('@jwt', response.data.jwtToken);		
         }
     }
 

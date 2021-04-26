@@ -41,13 +41,17 @@ export default function LoggedIn ({navigation}) {
             name:   search,
 			jwtToken: jwtToken
         });
+
+        if (response.data.jwtToken)
+        {
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
+        }
         
         if (response.data.error) {
             setError(response.data.error);
         }
         else
         {
-            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
             setName(response.data.creatorEvents.concat(response.data.participantEvents));
         }
     }

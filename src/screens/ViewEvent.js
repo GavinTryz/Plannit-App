@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { View, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from 'jwt-decode';
 
 import axios from 'axios';
 
@@ -27,18 +28,82 @@ export default function ViewEvent ({navigation, route}) {
 			jwtToken: jwtToken
         });
         
+		if (response.data.jwtToken)
+        {
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
+        }
+
         if (response.data.error) {
             setError(response.data.error);
         }
         else
         {
-			await AsyncStorage.setItem('@jwt', response.data.jwtToken);
 			setParticipants(response.data.participants);
 			setWeekly(response.data.weekly);
 			setStartTime(response.data.startTime);
 			setEndTime(response.data.endTime);
 			setDaysOfWeek(response.data.daysOfWeek);
 			setEventTime(response.data.eventTime);		
+        }
+    }
+
+	const DeleteEvent = async () => {
+		var jwtToken = await AsyncStorage.getItem('@jwt');
+
+        var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/deleteEvent', {
+            eventID: _id,
+			jwtToken: jwtToken
+        });
+        
+		if (response.data.jwtToken)
+        {
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
+        }
+
+        if (response.data.error) 
+		{
+            setError(response.data.error);
+        }
+    }
+
+	const LeaveEvent = async () => {
+		var jwtToken = await AsyncStorage.getItem('@jwt');
+		var userID = jwt_token(jwtToken).userId;
+
+        var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/leaveEvent', {
+            eventID: _id,
+			userID: userID,
+			jwtToken: jwtToken
+        });
+        
+		if (response.data.jwtToken)
+        {
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
+        }
+
+        if (response.data.error) 
+		{
+            setError(response.data.error);
+        }
+    }
+
+	const ChooseTime = async () => {
+		var jwtToken = await AsyncStorage.getItem('@jwt');
+
+        var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/leaveEvent', {
+            eventID: _id,
+			eventTime: eventTime,
+			jwtToken: jwtToken
+        });
+        
+		if (response.data.jwtToken)
+        {
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
+        }
+
+        if (response.data.error) 
+		{
+            setError(response.data.error);
         }
     }
 

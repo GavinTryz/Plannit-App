@@ -4,6 +4,8 @@ import CheckBox from '@react-native-community/checkbox';
 import {Picker} from '@react-native-picker/picker';
 
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from 'jwt-decode';
 
 import { Input, TextLink, Loading, Button } from '../components/common';
 import styles from "../styles/styles"
@@ -76,12 +78,14 @@ export default function NewEvent ({navigation}) {
 			jwtToken: jwtToken
         });
         
-        if (response.data.error) {
-            setError(response.data.error);
-        }
-        else
+		if (response.data.jwtToken)
         {
-			await AsyncStorage.setItem('@jwt', response.data.jwtToken);		
+            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
+        }
+
+        if (response.data.error) 
+		{
+            setError(response.data.error);
         }
     }
 
