@@ -49,13 +49,13 @@ export default function LoggedIn ({navigation}) {
 
     // Example list of events, for testing
     const [people,setName]=useState([
-		{name:'Event', key:'123'}, // The id is the ID of each meeting
-		{name:'Another Event', key:'231'},
-		{name:'SomeNameOfAnEvent', key:'342'},
-		{name:'Anime Club', key:'4345'},
-		{name:'POOP Meeting', key:'5123'},
-		{name:'Meeting with Kim Jong Un', key:'6345'},
-		{name:'Some other event', key:'67'},
+		{eventName:'Event', key:'123'}, // The id is the ID of each meeting
+		{eventName:'Another Event', key:'231'},
+		{eventName:'SomeNameOfAnEvent', key:'342'},
+		{eventName:'Anime Club', key:'4345'},
+		{eventName:'POOP Meeting', key:'5123'},
+		{eventName:'Meeting with Kim Jong Un', key:'6345'},
+		{eventName:'Some other event', key:'67'},
 	
 	  ])
 
@@ -77,8 +77,8 @@ export default function LoggedIn ({navigation}) {
                     { people.map((item) => {
                         return(
                             <View key={item.key}>
-                                <TouchableOpacity onPress={() => navigation.navigate('TestScreen')}>
-                                    <Text style = {styles.myEventListTitle}>{item.name}</Text>
+                                <TouchableOpacity onPress={() => navigation.navigate('TestScreen', item)}>
+                                    <Text style = {styles.myEventListTitle}>{item.eventName}</Text>
                                 </TouchableOpacity>
                             </View>
                         )
