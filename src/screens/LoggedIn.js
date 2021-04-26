@@ -86,7 +86,7 @@ export default function LoggedIn ({navigation}) {
                 <View style={section}>
                     <Input
                         placeholder="Event Name"
-                        label="Find"
+                        label="Find Events"
                         value={search}
                         onChangeText={setSearch}
                     />
