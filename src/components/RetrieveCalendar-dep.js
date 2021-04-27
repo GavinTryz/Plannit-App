@@ -11,70 +11,70 @@ export default function RetrieveCalendar(props) {
     const daysOfWeek = ['Time', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     const timeData = [
-        '12:00AM',  '12:00AM',  '12:00AM',  '12:00AM',  '12:00AM',  '12:00AM',  '12:00AM',
-        '12:30AM',  '12:30AM',  '12:30AM',  '12:30AM',  '12:30AM',  '12:30AM',  '12:30AM',
-        '1:00AM',   '1:00AM',   '1:00AM',   '1:00AM',   '1:00AM',   '1:00AM',   '1:00AM',
-        '1:30AM',   '1:30AM',   '1:30AM',   '1:30AM',   '1:30AM',   '1:30AM',   '1:30AM',
-        '2:00AM',   '2:00AM',   '2:00AM',   '2:00AM',   '2:00AM',   '2:00AM',   '2:00AM',
-        '2:30AM',   '2:30AM',   '2:30AM',   '2:30AM',   '2:30AM',   '2:30AM',   '2:30AM',
-        '3:00AM',   '3:00AM',   '3:00AM',   '3:00AM',   '3:00AM',   '3:00AM',   '3:00AM',
-        '3:30AM',   '3:30AM',   '3:30AM',   '3:30AM',   '3:30AM',   '3:30AM',   '3:30AM', 
-        '4:00AM',
-        '4:30AM',
-        '5:00AM',
-        '5:30AM',
-        '6:00AM',
-        '6:30AM',
-        '7:00AM',
-        '7:30AM',
-        '8:00AM',
-        '8:30AM',
-        '9:00AM',
-        '9:30AM',
-        '10:00AM',
-        '10:30AM',
-        '11:00AM',
-        '11:30AM',
-        '12:00PM', '12:00AM', '12:00AM', '12:00AM', '12:00AM', '12:00AM', '12:00AM',
-        '12:30PM', '12:30AM', '12:30AM', '12:30AM', '12:30AM', '12:30AM', '12:30AM',
-        '1:00PM', '1:00AM', '1:00AM', '1:00AM', '1:00AM', '1:00AM', '1:00AM',
-        '1:30PM', '1:30AM', '1:30AM', '1:30AM', '1:30AM', '1:30AM', '1:30AM',
-        '2:00PM', '2:00AM', '2:00AM', '2:00AM', '2:00AM', '2:00AM', '2:00AM',
-        '2:30PM', '2:30AM', '2:30AM', '2:30AM', '2:30AM', '2:30AM', '2:30AM',
-        '3:00PM', '3:00AM', '3:00AM', '3:00AM', '3:00AM', '3:00AM', '3:00AM',
-        '3:30PM', '3:30AM', '3:30AM', '3:30AM', '3:30AM', '3:30AM', '3:30AM',
-        '4:00PM',
-        '4:30PM',
-        '5:00PM',
-        '5:30PM',
-        '6:00PM',
-        '6:30PM',
-        '7:00PM',
-        '7:30PM',
-        '8:00PM',
-        '8:30PM',
-        '9:00PM',
-        '9:30PM',
-        '10:00PM',
-        '10:30PM',
-        '11:00PM',
-        '11:30PM',
+        '12:00',  '12:00',  '12:00',  '12:00',  '12:00',  '12:00',  '12:00',
+        '12:30',  '12:30',  '12:30',  '12:30',  '12:30',  '12:30',  '12:30',
+        '1:00',   '1:00',   '1:00',   '1:00',   '1:00',   '1:00',   '1:00',
+        '1:30',   '1:30',   '1:30',   '1:30',   '1:30',   '1:30',   '1:30',
+        '2:00',   '2:00',   '2:00',   '2:00',   '2:00',   '2:00',   '2:00',
+        '2:30',   '2:30',   '2:30',   '2:30',   '2:30',   '2:30',   '2:30',
+        '3:00',   '3:00',   '3:00',   '3:00',   '3:00',   '3:00',   '3:00',
+        '3:30',   '3:30',   '3:30',   '3:30',   '3:30',   '3:30',   '3:30', 
+        '4:00',
+        '4:30',
+        '5:00',
+        '5:30',
+        '6:00',
+        '6:30',
+        '7:00',
+        '7:30',
+        '8:00',
+        '8:30',
+        '9:00',
+        '9:30',
+        '10:00',
+        '10:30',
+        '11:00',
+        '11:30',
+        '12:00', '12:00', '12:00', '12:00', '12:00', '12:00', '12:00',
+        '12:30', '12:30', '12:30', '12:30', '12:30', '12:30', '12:30',
+        '1:00', '1:00', '1:00', '1:00', '1:00', '1:00', '1:00',
+        '1:30', '1:30', '1:30', '1:30', '1:30', '1:30', '1:30',
+        '2:00', '2:00', '2:00', '2:00', '2:00', '2:00', '2:00',
+        '2:30', '2:30', '2:30', '2:30', '2:30', '2:30', '2:30',
+        '3:00', '3:00', '3:00', '3:00', '3:00', '3:00', '3:00',
+        '3:30', '3:30', '3:30', '3:30', '3:30', '3:30', '3:30',
+        '4:00',
+        '4:30',
+        '5:00',
+        '5:30',
+        '6:00',
+        '6:30',
+        '7:00',
+        '7:30',
+        '8:00',
+        '8:30',
+        '9:00',
+        '9:30',
+        '10:00',
+        '10:30',
+        '11:00',
+        '11:30',
     ];
 
     {/*
-    const tableCell = (dayOfWeekObj, timeObj, nameofDay) => {
+    const tableCell = (dayOfWeekObj, timeObj, neofDay) => {
         if (dayOfWeekObj === true)
             return (
                 <tr>
-                    <CalendarInfoOnCell time={timeObj}          day={nameofDay} calendar={props.calendar} setCalendar={props.setCalendar} />
-                    <CalendarInfoOnCell time={timeObj + ':30'}  day={nameofDay} calendar={props.calendar} setCalendar={props.setCalendar} />
+                    <CalendarInfoOnCell time={timeObj}          day={neofDay} calendar={props.calendar} setCalendar={props.setCalendar} />
+                    <CalendarInfoOnCell time={timeObj + ':30'}  day={neofDay} calendar={props.calendar} setCalendar={props.setCalendar} />
                 </tr>
             );
         else
             return (
                 <tr>
-                    <tr><span className="calendarCellOff" /></tr>
-                    <tr><span className="calendarCellOff" /></tr>
+                    <tr><span classNe="calendarCellOff" /></tr>
+                    <tr><span classNe="calendarCellOff" /></tr>
                 </tr>
             );
     }
@@ -82,21 +82,21 @@ export default function RetrieveCalendar(props) {
 
     const tableHeader = (daysOfWeek, index) => {
         return (
-            <th className='calendarTh' key={index}>{daysOfWeek}</th>
+            <th classNe='calendarTh' key={index}>{daysOfWeek}</th>
         );
     }
 
     const makecolumns = (timeObj, index) => {
         return (
             <tr key={index}>
-                <td className='calendarTd'>{timeToString(timeObj)}</td>
-                <td className='calendarTd'>{tableCell(dayOfWeekObj.sunday,      timeObj, 'Sunday')}</td>
-                <td className='calendarTd'>{tableCell(dayOfWeekObj.monday,      timeObj, 'Monday')}</td>
-                <td className='calendarTd'>{tableCell(dayOfWeekObj.tuesday,     timeObj, 'Tuesday')}</td>
-                <td className='calendarTd'>{tableCell(dayOfWeekObj.wednesday,   timeObj, 'Wednesday')}</td>
-                <td className='calendarTd'>{tableCell(dayOfWeekObj.thursday,    timeObj, 'Thursday')}</td>
-                <td className='calendarTd'>{tableCell(dayOfWeekObj.friday,      timeObj, 'Friday')}</td>
-                <td className='calendarTd'>{tableCell(dayOfWeekObj.saturday,    timeObj, 'Saturday')}</td>
+                <td classNe='calendarTd'>{timeToString(timeObj)}</td>
+                <td classNe='calendarTd'>{tableCell(dayOfWeekObj.sunday,      timeObj, 'Sunday')}</td>
+                <td classNe='calendarTd'>{tableCell(dayOfWeekObj.monday,      timeObj, 'Monday')}</td>
+                <td classNe='calendarTd'>{tableCell(dayOfWeekObj.tuesday,     timeObj, 'Tuesday')}</td>
+                <td classNe='calendarTd'>{tableCell(dayOfWeekObj.wednesday,   timeObj, 'Wednesday')}</td>
+                <td classNe='calendarTd'>{tableCell(dayOfWeekObj.thursday,    timeObj, 'Thursday')}</td>
+                <td classNe='calendarTd'>{tableCell(dayOfWeekObj.friday,      timeObj, 'Friday')}</td>
+                <td classNe='calendarTd'>{tableCell(dayOfWeekObj.saturday,    timeObj, 'Saturday')}</td>
             </tr>
         );
     }

@@ -13,32 +13,32 @@ import styles from "../styles/styles"
 
 export default function LoggedIn ({navigation}) {
     const [userID,      setUserID]      = useState(-1);
-    const [firstName,   setFirstname]   = useState('');
-    const [lastName,    setLastname]    = useState('');
+    const [firstNe,   setFirstne]   = useState('');
+    const [lastNe,    setLastne]    = useState('');
     const [showLogin,   setShowlogin]   = useState(false);
 
     const { section_LoggedIn, textStyle, buttonView, button, welcomeMessage } = styles; 
 
     const retrieveInfo = async () => {
-        setFirstname(AsyncStorage.getItem('@firstName'));
-        setLastname (AsyncStorage.getItem('@lastName'));
+        setFirstne(AsyncStorage.getItem('@firstNe'));
+        setLastne (AsyncStorage.getItem('@lastNe'));
         setUserID   (AsyncStorage.getItem('@userID'));
     }
 
     const decodeJWT = async () => {
         var token = jwt_decode(await AsyncStorage.getItem('@jwt'));
-        setFirstname(token.firstName);
-        setLastname (token.lastName);
+        setFirstne(token.firstNe);
+        setLastne (token.lastNe);
         setUserID   (token.userId);
 
-        await AsyncStorage.setItem('@firstName', firstName);
-        await AsyncStorage.setItem('@lastName',  lastName);
+        await AsyncStorage.setItem('@firstNe', firstNe);
+        await AsyncStorage.setItem('@lastNe',  lastNe);
         await AsyncStorage.setItem('@userID',    userID);
     }
 
     useEffect(() => {
         retrieveInfo();
-        //if (firstName == '' || firstName == undefined) {
+        //if (firstNe == '' || firstNe == undefined) {
             decodeJWT();
         //}        
         //writeItemToStorage("john", "doe", "jwt");
@@ -48,11 +48,11 @@ export default function LoggedIn ({navigation}) {
     return (
         <View style={section_LoggedIn}>   
             <Text style={welcomeMessage}>
-                {"Hello " + firstName + ", this is your homepage. Below you may edit and view your events."}
+                {"Hello " + firstNe + ", this is your homepage. Below you may edit and view your events."}
                 {"\n"}
             </Text>
             <Text style={textStyle}>
-                {userID + ", " + firstName + ", " + lastName + "\n"}
+                {userID + ", " + firstNe + ", " + lastNe + "\n"}
             </Text>
             <View style={buttonView}>
                 <Button 
