@@ -1,4 +1,4 @@
-import React, { useEffect }     from 'react';
+import React, { useEffect, useState }     from 'react';
 import { View, Text, Button }   from 'react-native';
 
 import { NavigationContainer }  from '@react-navigation/native';
@@ -12,10 +12,10 @@ import jwt_decode from 'jwt-decode';
 import styles from "../styles/styles"
 
 export default function LoggedIn ({navigation}) {
-    const [userID,      setUserID]      = React.useState(-1);
-    const [firstName,   setFirstname]   = React.useState('');
-    const [lastName,    setLastname]    = React.useState('');
-    const [showLogin,   setShowlogin]   = React.useState(false);
+    const [userID,      setUserID]      = useState(-1);
+    const [firstName,   setFirstname]   = useState('');
+    const [lastName,    setLastname]    = useState('');
+    const [showLogin,   setShowlogin]   = useState(false);
 
     const { section_LoggedIn, textStyle, buttonView, button, welcomeMessage } = styles; 
 
@@ -37,7 +37,7 @@ export default function LoggedIn ({navigation}) {
     }
 
     useEffect(() => {
-        //retrieveInfo();
+        retrieveInfo();
         //if (firstName == '' || firstName == undefined) {
             decodeJWT();
         //}        

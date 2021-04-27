@@ -7,7 +7,6 @@ import axios from 'axios';
 
 import jwt_decode from 'jwt-decode';
 
-
 import { Input, TextLink, Loading, Button } from '../components/common';
 import { App } from '../App';
 import styles from "../styles/styles"
