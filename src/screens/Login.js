@@ -30,6 +30,10 @@ export default function Login ({navigation}) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken); 
             navigation.navigate('My Events'); // Previously called Home
         }
+        else
+        {
+            setError(response.data.error);
+        }
     }
     
     const decodeJWT = async (token) => {
@@ -77,6 +81,12 @@ export default function Login ({navigation}) {
             <View style={centeredText}>
                 <TextLink onPress={() => navigation.navigate('Register')}>
                     Don't have an account? Register!
+                </TextLink>
+            </View>
+
+            <View style={centeredText}>
+                <TextLink onPress={() => navigation.navigate('Send Reset')}>
+                    Forgot Password? Click here to reset your password
                 </TextLink>
             </View>
         </View>
