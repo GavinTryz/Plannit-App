@@ -119,7 +119,7 @@ export default function ViewEvent ({navigation, route}) {
                             title="Invite Users" 
                             style={button} 
                             color="#485063" 
-                            onPress={() => console.log("Invite pressed")}
+                            onPress={() => navigation.navigate('Invite Users', {eventName, _id})}
                         />
                     </View>
                     <View style={{width: "50%"}}>

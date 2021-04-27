@@ -13,6 +13,7 @@ import ListEvents    from './screens/ListEvents';
 import MyWeek        from './screens/MyWeek';
 import TestScreen    from './screens/TestScreen';
 import ViewEvent     from './screens/ViewEvent';
+import InviteUsers   from './screens/InviteUsers';
 
 const Stack = createStackNavigator();
 
@@ -103,6 +104,10 @@ function App({navigation}) {
                     <Stack.Screen 
                         name='My Typical Week' 
                         component={MyWeek} 
+                    />
+                    <Stack.Screen 
+                        name='Invite Users' 
+                        component={InviteUsers} 
                     />
                 </Stack.Navigator>
             )}  

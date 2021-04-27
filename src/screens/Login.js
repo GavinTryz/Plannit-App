@@ -79,14 +79,13 @@ export default function Login ({navigation}) {
                 }
             </View>
             <View style={centeredText}>
-                <TextLink onPress={() => navigation.navigate('Register')}>
-                    Don't have an account? Register!
+                <TextLink onPress={() => navigation.navigate('Send Reset')}>
+                    Forgot Password
                 </TextLink>
             </View>
-
             <View style={centeredText}>
-                <TextLink onPress={() => navigation.navigate('Send Reset')}>
-                    Forgot Password? Click here to reset your password
+                <TextLink onPress={() => navigation.navigate('Register')}>
+                    Don't have an account? Register!
                 </TextLink>
             </View>
         </View>

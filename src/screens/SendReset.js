@@ -44,7 +44,7 @@ export default function Login ({navigation}) {
                 </Text>
 
                 {!loading ?
-                    <Button onPress={SendReset}> Send Verification Code </Button>
+                    <Button onPress={[SendReset, console.log("Clicked Send Verification Code")]}> Send Verification Code </Button>
                     :
                     <Loading size={'large'} />
                 }
