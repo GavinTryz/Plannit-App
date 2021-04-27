@@ -103,5 +103,38 @@ export default styles = StyleSheet.create({
 		padding: 30,
 		backgroundColor: '#E5E5E5',
 		fontSize: 24
-	}
+	},
+
+
+
+
+    tableContainer: { 
+        flex: 1, 
+        padding: 16, 
+        paddingTop: 30, 
+        backgroundColor: '#ffffff' 
+      },
+      head: { 
+        height: 50, 
+        backgroundColor: '#6F7BD9' 
+      },
+      text: { 
+        textAlign: 'center', 
+        fontWeight: '200' 
+      },
+      dataWrapper: { 
+        marginTop: -1 
+      },
+      row: { 
+        height: 40, 
+        backgroundColor: '#F7F8FA'
+      },
+      HeadStyle: { 
+        height: 50,
+        alignContent: "center",
+        backgroundColor: '#ffe0f0'
+      },
+      TableText: { 
+        margin: 10
+      }
 })
