@@ -1,5 +1,4 @@
 import React, { useEffect, useState }     from 'react';
-import {useState} from "react";
 import { View, Text, Button, ScrollView, TouchableOpacity }   from 'react-native';
 import { Input } from '../components/common';
 import axios from 'axios';
