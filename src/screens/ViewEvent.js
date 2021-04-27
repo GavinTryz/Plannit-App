@@ -4,6 +4,8 @@ import { View, Text, Button, ScrollView, TouchableOpacity, StyleSheet }   from '
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from "../styles/styles"
 
+import jwt_decode from 'jwt-decode';
+
 import axios from 'axios';
 
 export default function ViewEvent ({navigation, route}) {
@@ -85,7 +87,7 @@ export default function ViewEvent ({navigation, route}) {
 
 	const LeaveEvent = async () => {
 		var jwtToken = await AsyncStorage.getItem('@jwt');
-		var userID = jwt_token(jwtToken).userId;
+		var userID = jwt_decode(jwtToken).userId;
 
         var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/leaveEvent', {
             eventID: _id,
@@ -100,8 +102,13 @@ export default function ViewEvent ({navigation, route}) {
 
         if (response.data.error) 
 		{
+			console.log(response.data.error);
             setError(response.data.error);
         }
+		else
+		{
+			navigation.navigate('My Events');
+		}
     }
 
 	function createTable()
@@ -185,7 +192,7 @@ export default function ViewEvent ({navigation, route}) {
                             title="Leave Event" 
                             style={button} 
                             color="#ed523e" 
-                            onPress={() => console.log("Leave pressed")}
+                            onPress={() => LeaveEvent()}
                         />
                     </View>
                     
