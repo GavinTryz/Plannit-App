@@ -92,9 +92,6 @@ export default function NewEvent ({navigation}) {
 	return (
 		<View style={form_full} >
 			<View style={section2}>
-				<View style={bordered}>
-					<Text>This is the NewEvent page</Text>
-				</View>
 				<View 
 					style={{
 						minHeight: '15%', 

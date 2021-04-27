@@ -1,12 +1,14 @@
 import React, { useState, useEffect} from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, ScrollView, TouchableOpacity }   from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwt_decode from 'jwt-decode';
+import styles from "../styles/styles"
 
 import axios from 'axios';
 
 export default function ViewEvent ({navigation, route}) {
 	const {eventName, _id} = route.params; // Key is the event ID
+
+    const {button} = styles; 
 
 	const [participants, setParticipants] = useState([]);
     const [weekly, setWeekly] = useState(false);
@@ -43,7 +45,7 @@ export default function ViewEvent ({navigation, route}) {
 			setStartTime(response.data.startTime);
 			setEndTime(response.data.endTime);
 			setDaysOfWeek(response.data.daysOfWeek);
-			setEventTime(response.data.eventTime);		
+			setEventTime(response.data.eventTime);
         }
     }
 
@@ -111,6 +113,25 @@ export default function ViewEvent ({navigation, route}) {
 
 	return (
 		<View>
+            <View style={{flexDirection: "row"}}>
+                    <View style = {{width: "50%"}}>
+                        <Button
+                            title="Invite Users" 
+                            style={button} 
+                            color="#485063" 
+                            onPress={() => console.log("Invite pressed")}
+                        />
+                    </View>
+                    <View style={{width: "50%"}}>
+                        <Button 
+                            title="Leave Event" 
+                            style={button} 
+                            color="#ed523e" 
+                            onPress={() => console.log("Leave pressed")}
+                        />
+                    </View>
+                    
+                </View>
 			<Text>{"Display event info " + _id + ", " + weekly + ", " + startTime + ", " + endTime + ", " + eventTime}</Text>
 		</View>
 	);

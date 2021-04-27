@@ -17,6 +17,7 @@ export default styles = StyleSheet.create({
         borderBottomWidth: 1,
         backgroundColor: '#fff',
         borderColor: '#ddd',
+        //flex:1
     },
     form2: {
         width: '100%',
@@ -27,6 +28,7 @@ export default styles = StyleSheet.create({
         borderBottomWidth: 1,
         backgroundColor: '#fff',
         borderColor: '#ddd',
+        flex: 1
     },
     errorTextStyle: {
         alignSelf: 'center',
@@ -34,7 +36,9 @@ export default styles = StyleSheet.create({
         color: 'red'
     },
     button: {
-        
+        marginTop: 10,
+        marginBottom: 10,
+		padding: 10
     },
     buttonView: {
         width: "50%", 

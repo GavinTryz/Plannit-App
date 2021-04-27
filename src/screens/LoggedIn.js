@@ -24,6 +24,10 @@ export default function LoggedIn ({navigation}) {
     const [search,         setSearch]   = React.useState('');
     const [error,         setError]   = React.useState('');
 
+    useEffect(() => {
+        SearchEvents();
+	}, []);
+
     const { section_LoggedIn, redTextStyle, buttonView, button, welcomeMessage, section } = styles; 
 
     const retrieveInfo = async () => {
@@ -58,7 +62,7 @@ export default function LoggedIn ({navigation}) {
 
     // Example list of events, for testing.
     // Have the API create something like this, filling eventName with the event name, and "key" with the event ID.
-    const [people,setName]=useState([]);
+    const [myEvents,setName]=useState([]);
 
     return (
         <View style={section_LoggedIn}>   
@@ -82,39 +86,28 @@ export default function LoggedIn ({navigation}) {
                     {"Debug: \nID: " + userID + "\nFName: " + firstName + " LName: " + lastName + "\n"}
                 </Text> */}
 
-                <View style={buttonView}>
-                    <Text> {"\n"} </Text>
-                    <Button 
-                        title="New Event" 
-                        style={button} 
-                        color="#485063" 
-                        onPress={() => navigation.navigate('New Event')}
-                    />
-                    <Text> {"\n"} </Text>
-                    {/* <Button 
-                        title="List Events" 
-                        style={button} 
-                        color="#485063" 
-                        onPress={() => navigation.navigate('List Events')}
-                    />
-                    <Text> {"\n"} </Text> */}
-                    <Button 
-                        title="My Typical Week" 
-                        style={button} 
-                        color="#485063" 
-                        onPress={() => navigation.navigate('My Typical Week')}
-                    />
-                    <Text> {"\n"} </Text>
-                    <Button 
-                        title="Notifications" 
-                        style={button} 
-                        color="#485063" 
-                        onPress={() => navigation.navigate('Notifications')}
-                    />
+                <View style={{flexDirection: "row"}}>
+                    <View style = {{width: "50%"}}>
+                        <Button
+                            title="New Event" 
+                            style={button} 
+                            color="#485063" 
+                            onPress={() => navigation.navigate('New Event')}
+                        />
+                    </View>
+                    <View style={{width: "50%"}}>
+                        <Button 
+                            title="My Typical Week" 
+                            style={button} 
+                            color="#485063" 
+                            onPress={() => navigation.navigate('My Typical Week')}
+                        />
+                    </View>
+                    
                 </View>
 
                 <View style={styles.myEventListContainer}>
-                    { people.map((item) => {
+                    { myEvents.map((item) => {
                         return(
                             <View key={item._id}>
                                 <TouchableOpacity onPress={() => navigation.navigate('View Event', item)}>
