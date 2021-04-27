@@ -17,7 +17,7 @@ export default function ViewEvent ({navigation, route}) {
     const [endTime, setEndTime] = useState('');
     const [daysOfWeek, setDaysOfWeek] = useState([]);
 	const [eventTime, setEventTime] = useState([]);
-	const [availabilityTable, setAvailabilityTable] = useState([["1", "2", "3", "4", "5", "6", "7"]]);
+	const [availabilityTable, setAvailabilityTable] = useState([[]]);
     const [error, setError] = useState('');
 
 	useEffect(() => {
