@@ -16,6 +16,7 @@ import NewEvent      from './screens/NewEvent';
 import ListEvents    from './screens/ListEvents';
 import Notifications from './screens/Notifications';
 import MyWeek        from './screens/MyWeek';
+import SetEventAvail from './screens/SetEventAvail'
 
 const Stack = createStackNavigator();
 
@@ -103,8 +104,8 @@ function App({navigation}) {
                         component={MyWeek} 
                     />
                     <Stack.Screen 
-                        name='Notifications' 
-                        component={Notifications} 
+                        name='Set Event Availability' 
+                        component={SetEventAvail}
                     />
                 </Stack.Navigator>
             )}  
