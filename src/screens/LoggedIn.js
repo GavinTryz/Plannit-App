@@ -1,4 +1,4 @@
-import React, { useEffect }     from 'react';
+import React, { useEffect, useState }     from 'react';
 import {useState} from "react";
 import { View, Text, Button, ScrollView, TouchableOpacity }   from 'react-native';
 import { Input } from '../components/common';
@@ -31,8 +31,8 @@ export default function LoggedIn ({navigation}) {
     const { section_LoggedIn, redTextStyle, buttonView, button, welcomeMessage, section } = styles; 
 
     const retrieveInfo = async () => {
-        setFirstname(AsyncStorage.getItem('@firstName'));
-        setLastname (AsyncStorage.getItem('@lastName'));
+        setFirstne(AsyncStorage.getItem('@firstNe'));
+        setLastne (AsyncStorage.getItem('@lastNe'));
         setUserID   (AsyncStorage.getItem('@userID'));
     }
 
