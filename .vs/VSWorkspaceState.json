@@ -3,8 +3,9 @@
     "",
     "\\src",
     "\\src\\components",
-    "\\src\\screens"
+    "\\src\\screens",
+    "\\src\\styles"
   ],
-  "SelectedNode": "\\src\\App.js",
+  "SelectedNode": "\\src\\components\\RetrieveCalendar-dep.js",
   "PreviewInSolutionExplorer": false
 }

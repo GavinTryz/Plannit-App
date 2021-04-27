@@ -113,28 +113,36 @@ export default styles = StyleSheet.create({
         padding: 16, 
         paddingTop: 30, 
         backgroundColor: '#ffffff' 
-      },
-      head: { 
+    },
+    head: { 
         height: 50, 
         backgroundColor: '#6F7BD9' 
-      },
-      text: { 
+    },
+    text: { 
         textAlign: 'center', 
         fontWeight: '200' 
-      },
-      dataWrapper: { 
+    },
+    dataWrapper: { 
         marginTop: -1 
-      },
-      row: { 
+    },
+    row: { 
         height: 40, 
         backgroundColor: '#F7F8FA'
-      },
-      HeadStyle: { 
+    },
+    HeadStyle: { 
         height: 50,
         alignContent: "center",
         backgroundColor: '#ffe0f0'
-      },
-      TableText: { 
+    },
+    TableText: { 
         margin: 10
-      }
+    },
+    scrollview: {
+        alignItems: 'center',
+    },
+    picker: {
+        width: "80%",
+        borderColor: '#ddd',
+        borderBottomWidth: 2,
+    },
 })

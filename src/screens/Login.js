@@ -7,7 +7,6 @@ import axios from 'axios';
 
 import jwt_decode from 'jwt-decode';
 
-
 import { Input, TextLink, Loading, Button } from '../components/common';
 import { App } from '../App';
 import styles from "../styles/styles"
@@ -40,8 +39,8 @@ export default function Login ({navigation}) {
         //var token = jwt;
         jwt_decode(token);
 
-        AsyncStorage.setItem('@firstName', JSON.stringify(token.firstName));
-        AsyncStorage.setItem('@lastName',  JSON.stringify(token.lastName));
+        AsyncStorage.setItem('@firstNe', JSON.stringify(token.firstNe));
+        AsyncStorage.setItem('@lastNe',  JSON.stringify(token.lastNe));
     }
 
     const { form, section, errorTextStyle, centeredText } = styles;
