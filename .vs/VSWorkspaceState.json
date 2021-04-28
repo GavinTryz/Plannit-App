@@ -3,9 +3,10 @@
     "",
     "\\src",
     "\\src\\components",
+    "\\src\\components\\common",
     "\\src\\screens",
     "\\src\\styles"
   ],
-  "SelectedNode": "\\src\\components\\RetrieveCalendar-dep.js",
+  "SelectedNode": "\\src\\screens\\InviteUsers.js",
   "PreviewInSolutionExplorer": false
 }

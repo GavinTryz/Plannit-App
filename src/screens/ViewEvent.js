@@ -30,8 +30,10 @@ export default function ViewEvent ({navigation, route}) {
 	const { button, form_full } = styles;
 
 	useEffect(() => {
-		ViewEvent();
-		createTable();
+		if (loading)
+		{
+			ViewEvent();
+		}
 		setLoading(false);
 	}, []);
 
@@ -58,12 +60,10 @@ export default function ViewEvent ({navigation, route}) {
 
 			setDaysOfWeek	(response.data.daysOfWeek);
 			setEventTime	(response.data.eventTime);
+
+			createTable(response.data.participants);
         }
     }
-
-	function convertDays(daysObject) {
-
-	}
 
 	const DeleteEvent = async () => {
 		var jwtToken = await AsyncStorage.getItem('@jwt');
@@ -104,7 +104,7 @@ export default function ViewEvent ({navigation, route}) {
 		}
     }
 
-	function createTable() {
+	function createTable(users) {
 		const rows = 48;
         const cols = 7;
 
@@ -112,10 +112,10 @@ export default function ViewEvent ({navigation, route}) {
         Array.from({ length: cols }, () => 0)
         );
 
-		for (let i = 0; i < participants.length; i++) {
+		for (let i = 0; i < users.length; i++) {
 			for (let row = 0; row < rows; row++) {
 				for (let col = 0; col < cols; col++) {
-                    if(participants[i].availability[col][row]) {
+                    if(users[i].availability[col][row]) {
                         availability[row][col]++;
                     }
                 }

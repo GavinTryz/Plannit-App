@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import { View, Text, Button, ScrollView, TouchableOpacity, StyleSheet }   from 'react-native';
+import { Table, Row, Rows } from 'react-native-table-component';
+import { View, Button, ScrollView }   from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from "../styles/styles"
 import WeekCell from "./WeekCell"
@@ -24,12 +24,14 @@ export default function MyWeek ({navigation, route}) {
     const [widthArray, setWidthArray] = useState([53,48,50,48,50,48,48,48]);
 
 	useEffect(() => {
-        GetWeek();
-        createTable();
+        if (loading)
+        {
+            GetWeek();
+        }
         setLoading(false);
 	}, []);
 
-    function createTable()
+    function createTable(inputTable)
     {
         var rows = 48;
         var cols = 7;
@@ -38,25 +40,13 @@ export default function MyWeek ({navigation, route}) {
         Array.from({ length: (cols + 1) }, () => null)
         );
 
-        if (week.length === 1)
-        {
-            var weekTable = Array.from({ length: rows }, () => 
-            Array.from({ length: cols }, () => false)
-            );
-            setWeek(weekTable);
-        }
-        else
-        {
-            var weekTable = week;
-        }
-
         for (var i = 0; i < rows; i++)
         {
             table[i][0] = times[i];
             for (var j = 0; j < cols; j++)
             {
 
-                table[i][j+1] = <WeekCell week={weekTable} row={i} col={j} setWeek={setWeek}/>
+                table[i][j+1] = <WeekCell week={inputTable} row={i} col={j} setWeek={setWeek}/>
             }
         }
 
@@ -101,6 +91,8 @@ export default function MyWeek ({navigation, route}) {
             }
 
 			setWeek(weekTable);
+            
+            createTable(weekTable);
         }
     }
 
