@@ -109,6 +109,14 @@ export default function LoggedIn ({navigation}) {
                         />
                     </View>
                 </View>
+                {/* <View style={{width: "50%"}}>
+                    <Button 
+                        title="Gavin's Test" 
+                        style={button} 
+                        color="#a9b63b" 
+                        onPress={() => navigation.navigate('Test Page')}
+                    />
+                </View> */}
 
                 <View style={styles.myEventListContainer}>
                     { myEvents.map((item) => {

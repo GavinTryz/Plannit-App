@@ -114,4 +114,9 @@ export default styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: "5%"
     },
+    redTextStyle: {
+        alignSelf: 'center',
+        fontSize: 18,
+        color: 'red',
+    }
 })

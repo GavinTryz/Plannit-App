@@ -12,7 +12,9 @@ import NewEvent      from './screens/NewEvent';
 import MyWeek        from './screens/MyWeek';
 import ViewEvent     from './screens/ViewEvent';
 import InviteUsers   from './screens/InviteUsers';
-import SetEventAvail from './screens/SetEventAvail'
+import SetEventAvail from './screens/SetEventAvail';
+import TestPage      from './screens/TestPage';
+
 
 import styles from "./styles/styles"
 
@@ -155,6 +157,10 @@ export default function App({navigation}) {
                             headerTitleStyle: headerTitleStyle,
                             headerTintColor: 'white',
                         }}
+                    />
+                    <Stack.Screen 
+                        name='Test Page' 
+                        component={TestPage} 
                     />
                 </Stack.Navigator>
             )}  
