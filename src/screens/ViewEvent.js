@@ -21,6 +21,11 @@ export default function ViewEvent ({navigation, route}) {
     const [daysOfWeek,			setDaysOfWeek]			= useState([]);
 	const [eventTime,			setEventTime]			= useState([]);
 	const [availabilityTable,	setAvailabilityTable]	= useState([[]]);
+	const [times, setTimes] = useState(["11:30 PM", "11:00 PM", "10:30 PM", "10:00 PM", "9:30 PM", "9:00 PM", "8:30 PM", "8:00 PM", "7:30 PM", 
+    "7:00 PM", "6:30 PM", "6:00 PM", "5:00 PM", "4:30 PM","4:00 PM", "3:30 PM", "3:00 PM", "2:30 PM", "2:00 PM", "1:30 PM", "1:00 PM", "12:30 PM", "12:00 PM",
+    "11:00 AM", "11:30 AM", "11:00 AM", "10:30 AM", "10:00 AM", "9:30 AM", "9:00 AM", "8:30 AM", "8:00 AM", "7:30 AM", "7:00 AM", "6:30 AM",
+    "6:00 AM", "5:30 AM", "5:00 AM", "4:30 AM", "4:00 AM", "3:30 AM", "3:00 AM", "2:30 AM", "2:00 AM", "1:30 AM", "1:00 AM", "12:30 AM", "12 AM" ]);
+	const [widthArray, setWidthArray] = [53,48,50,48,50,48,48,48];
 
 	const { button, form_full } = styles;
 
@@ -120,14 +125,15 @@ export default function ViewEvent ({navigation, route}) {
         }
 
 		var finalTable = Array.from({ length: rows }, () => 
-			Array.from({ length: cols }, () => '')
+			Array.from({ length: (cols + 1) }, () => '')
         );
 
 		for(let i = 0; i < rows; i++) {
+			finalTable[i][0] = times[i];
 			for(let j = 0; j < cols; j++) {
 				if (availability[i][j] > 0) {	
 					var num = availability[i][j];
-					finalTable[i][j] = num.toString();
+					finalTable[i][j+1] = num.toString();
 				}
 			}
 		}
@@ -181,50 +187,18 @@ export default function ViewEvent ({navigation, route}) {
 					alignContent: "center",
 				}}>
                         <Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
-                            <Row data={["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} style={styles.HeadStyle} textStyle={styles.TableText}/>
+                            <Row data={["Time", "Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.TableText}/>
                         </Table>
                         <ScrollView style={styles.dataWrapper}>
                             <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
                                 <Rows data={availabilityTable} 
 								style={styles.row}
-								widthArr={[50,50,50,50,50,50,50]}
+								widthArr={widthArray}
                                 textStyle={styles.centeredText}/>
                             </Table>
                         </ScrollView>
                     </View>
 			</ScrollView>
-
-			{/*<View style={styles.tableContainer}>
-				<Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
-					<Row data={["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} style={styles.HeadStyle} textStyle={styles.TableText}/>
-					<Rows data={availabilityTable} style={styles.row} textStyle={styles.TableText}/>
-				</Table>
-		</View>*/}
-			
-			{/*<View style={styles.container}>
-				<ScrollView horizontal={true}>
-					<View>
-						<Table borderStyle={{borderColor: '#C1C0B9'}}>
-						<Row data={daysOfWeek} widthArr={[100,100,100,100,100,100,100]} style={styles.head} textStyle={styles.text}/>
-						</Table>
-						<ScrollView style={styles.dataWrapper}>
-						<Table borderStyle={{borderColor: '#C1C0B9'}}>
-							{
-							availabilityTable.map((dataRow, index) => (
-								<Row
-								key={index}
-								data={dataRow}
-								widthArr={[100,100,100,100,100,100,100]}
-								style={[styles.row, index%2 && {backgroundColor: '#ffffff'}]}
-								textStyle={styles.text}
-								/>
-							))
-							}
-						</Table>
-						</ScrollView>
-					</View>
-					</ScrollView>
-			</View>*/}
 		</View>
 	);
 }
