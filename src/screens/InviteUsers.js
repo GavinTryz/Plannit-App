@@ -80,8 +80,6 @@ export default function InviteUsers ({navigation, route}) {
                         )}
                     />
                 </View>
-
-                    
             </ScrollView>
         </View>
     );

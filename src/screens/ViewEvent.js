@@ -15,6 +15,7 @@ export default function ViewEvent ({navigation, route}) {
 	const [weekly,				setWeekly]				= useState(false);
     const [startTime,			setStartTime]			= useState('');
     const [endTime,				setEndTime]				= useState('');
+	const [creatorID,			setCreatorID]				= useState('');
 	const [error,				setError]				= useState('');
 	const [participants,		setParticipants]		= useState([]);
     const [daysOfWeek,			setDaysOfWeek]			= useState([]);
@@ -59,7 +60,7 @@ export default function ViewEvent ({navigation, route}) {
 			setWeekly		(response.data.weekly);
 			setStartTime	(response.data.startTime);
 			setEndTime		(response.data.endTime);
-
+			setCreatorID	(response.data.creatorID);
 			setDaysOfWeek	(response.data.daysOfWeek);
 			setEventTime	(response.data.eventTime);
 
@@ -82,6 +83,10 @@ export default function ViewEvent ({navigation, route}) {
         if (response.data.error) {
             setError(response.data.error);
         }
+		else
+		{
+			navigation.navigate('My Events');
+		}
     }
 
 	const LeaveEvent = async () => {
@@ -162,46 +167,58 @@ export default function ViewEvent ({navigation, route}) {
     // Connect to the viewEvent API, and store all the data about the event with the id "key"
 
 	return (
-		<View>
-			{
-                !loading &&
-				<View>
-					<View style={{flexDirection: "row"}}>
-						<View style = {{width: "50%"}}>
-							<Button
-								title="Invite Users" 
-								style={button} 
-								color="#485063" 
-								onPress={() => navigation.navigate('Invite Users', {eventName, _id})}
-							/>
-						</View>
-						<View style={{width: "50%"}}>
-							<Button 
-								title="Leave Event" 
-								style={button} 
-								color="#ed523e" 
-								onPress={() => LeaveEvent()}
-							/>
-						</View>
+		<View style={form_full}>
+            <View style={{flexDirection: "row"}}>
+                <View style = {{width: "50%"}}>
+                    <Button
+                        title="Invite Users" 
+                        style={button} 
+                        color="#485063" 
+                        onPress={() => navigation.navigate('Invite Users', {eventName, _id})}
+                    />
+                </View>
+				{_id.localeCompare(creatorID) ? 
+				(
+					<View style={{width: "50%"}}>
+						<Button 
+							title="Delete Event" 
+							style={button} 
+							color="#ed523e" 
+							onPress={() => DeleteEvent()}
+						/>
 					</View>
+				) : (
+					<View style={{width: "50%"}}>
+						<Button 
+							title="Leave Event" 
+							style={button} 
+							color="#ed523e" 
+							onPress={() => LeaveEvent()}
+						/>
+					</View>
+				)
+				}
+                
+            </View>
 
-					<ScrollView horizontal={true}>
-						<View>
-							<Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
-								<Row data={["Time", "Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.TableText}/>
-							</Table>
-							<ScrollView style={styles.dataWrapper}>
-								<Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-									<Rows data={availabilityTable} 
-									style={styles.row}
-									widthArr={widthArray}
-									textStyle={styles.centeredText}/>
-								</Table>
-							</ScrollView>
-						</View>
-					</ScrollView>
-				</View>
-            }
-		</View>
+			<ScrollView horizontal={true}>
+				<View style={{
+					alignContent: "center",
+				}}>
+                        <Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
+                            <Row data={["Time", "Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.TableText}/>
+                        </Table>
+                        <ScrollView style={styles.dataWrapper}>
+                            <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
+                                <Rows data={availabilityTable} 
+								style={styles.row}
+								widthArr={widthArray}
+                                textStyle={styles.centeredText}/>
+                            </Table>
+                        </ScrollView>
+                    </View>
+			</ScrollView>
+		</View>	
+
 	);
 }
