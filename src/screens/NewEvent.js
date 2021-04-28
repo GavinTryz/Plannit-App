@@ -57,10 +57,9 @@ export default function NewEvent ({navigation}) {
 		if (response.data.error) {
 			setError(response.data.error);
 		}
-
-		if (response.data.eventID !== null) {
+		else
+		{
 			navigation.navigate('Set Event Availability', {
-				jwt:		response.data.jwtToken,
 				eventID:	response.data.eventID,
 				eventName:	eventName,
 			});

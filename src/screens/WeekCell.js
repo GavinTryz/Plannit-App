@@ -19,7 +19,8 @@ export default function WeekCell(props){
 
     function isChecked()
     {
-        return props.week[props.row][props.col];
+        var check = props.week[props.row][props.col];
+        return check;
     }
     
     return(

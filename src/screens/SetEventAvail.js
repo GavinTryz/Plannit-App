@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, Switch, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Table, Row, Rows} from 'react-native-table-component';
+import { View, ScrollView, Button } from 'react-native';
+
+import axios from 'axios';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import WeekCell from "./WeekCell"
 
 import jwt_decode from 'jwt-decode';
 
-import { Input, TextLink, Loading, Button } from '../components/common';
-
 export default function SetEventAvail({ navigation, route }) {
-    const { jwt, eventID, eventName } = route.params;
+    const { eventID, eventName } = route.params;
 
-    const [enableCustom,    setEnablecustom]    = useState(false);
     const [error,           setError]           = useState('');
     const [availability,    setAvailability]    = useState([[]]);
 	const [availabilityTable, setAvailabilityTable] = useState([[]]);
@@ -20,12 +20,15 @@ export default function SetEventAvail({ navigation, route }) {
     "7:00 PM", "6:30 PM", "6:00 PM", "5:00 PM", "4:30 PM","4:00 PM", "3:30 PM", "3:00 PM", "2:30 PM", "2:00 PM", "1:30 PM", "1:00 PM", "12:30 PM", "12:00 PM",
     "11:00 AM", "11:30 AM", "11:00 AM", "10:30 AM", "10:00 AM", "9:30 AM", "9:00 AM", "8:30 AM", "8:00 AM", "7:30 AM", "7:00 AM", "6:30 AM",
     "6:00 AM", "5:30 AM", "5:00 AM", "4:30 AM", "4:00 AM", "3:30 AM", "3:00 AM", "2:30 AM", "2:00 AM", "1:30 AM", "1:00 AM", "12:30 AM", "12 AM" ]);
+    const [widthArray, setWidthArray] = useState([53,48,50,48,50,48,48,48]);
 
-    const { form_full, scrollview } = styles;
+    const { form_full, scrollview, dataWrapper, HeadStyle, centeredText, row, button } = styles;
 
     useEffect(() => {
-        GrabWeek();
-        createTable();
+        if (loading)
+        {
+            GrabWeek();
+        }
         setLoading(false);
 	}, []);
 
@@ -34,7 +37,7 @@ export default function SetEventAvail({ navigation, route }) {
         var userID = jwt_decode(jwtToken).userId;
 
         var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/getWeek', {
-            creatorID: userID,
+            userID: userID,
             jwtToken: jwtToken,
         });
 
@@ -47,10 +50,11 @@ export default function SetEventAvail({ navigation, route }) {
         } 
         else
         {
+            console.log(response.data.week);
             var rows = 48;
             var cols = 7;
 
-            var availabilityTable = Array.from({ length: rows }, () => 
+            var newTable = Array.from({ length: rows }, () => 
             Array.from({ length: cols }, () => false)
             );
 
@@ -59,42 +63,61 @@ export default function SetEventAvail({ navigation, route }) {
             {
                 for (var j = 0; j < cols; j++)
                 {
-                    weekTable[i][j] = table[j][i]
+                    newTable[i][j] = table[j][i];
                 }
             }
 
-			await setAvailability(availabilityTable);
+			setAvailability(newTable);
+
+            
+            createTable(newTable);
         }
 
     }
 
     const SendWeek = async () => {
         var jwtToken = await AsyncStorage.getItem('@jwt');
+        console.log(jwtToken);
+
+        var rows = 7;
+        var cols = 48;
+
+        console.log("this worked");
+
+        var availabilityTable = Array.from({ length: rows }, () => 
+            Array.from({ length: cols }, () => false)
+            );
+
+        for (var i = 0; i < rows; i++)
+        {
+            for (var j = 0; j < cols; j++)
+            {
+                availabilityTable[i][j] = availability[j][i];
+            }
+        }
 
         var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/joinEvent', {
             jwtToken: jwtToken,
             eventID: eventID,
             eventName: eventName,
-            availability: availability,
+            availability: availabilityTable,
         });
 
         if (response.data.jwtToken) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken);
         }
-    }
 
-    const Submit = async () => {
-        if (enableCustom) {
-
-        } else {
-            GrabWeek();
+        if (response.data.error) {
+            console.log(response.data.error);
+            setError(response.data.error);
         }
-        SendWeek();
-
-        navigation.navigate('My Events');
+        else
+        {
+            navigation.navigate('My Events');
+        }
     }
 
-    function createTable()
+    function createTable(inputTable)
     {
         var rows = 48;
         var cols = 7;
@@ -108,90 +131,11 @@ export default function SetEventAvail({ navigation, route }) {
             table[i][0] = times[i];
             for (var j = 0; j < cols; j++)
             {
-
-                table[i][j+1] = <WeekCell week={availability} row={i} col={j} setWeek={setAvailability}/>
+                table[i][j+1] = <WeekCell week={inputTable} row={i} col={j} setWeek={setAvailability}/>
             }
         }
 
         setAvailabilityTable(table);
-    }
-
-	const GetWeek = async () => {
-		var jwtToken = await AsyncStorage.getItem('@jwt');
-        var userID = jwt_decode(jwtToken).userId;
-
-        var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/getWeek', {
-            userID: userID,
-			jwtToken: jwtToken
-        });
-        
-		if (response.data.jwtToken)
-        {
-            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
-        }
-
-        if (response.data.error) 
-		{
-			console.log(response.data.error);
-            setError(response.data.error);
-        }
-        else
-        {
-            var rows = 48;
-            var cols = 7;
-
-            var weekTable = Array.from({ length: rows }, () => 
-            Array.from({ length: cols }, () => false)
-            );
-
-            var table = response.data.week;
-            for (var i = 0; i < rows; i++)
-            {
-                for (var j = 0; j < cols; j++)
-                {
-                    weekTable[i][j] = table[j][i]
-                }
-            }
-
-			setWeek(weekTable);
-        }
-    }
-
-    const SetWeek = async () => {
-		var jwtToken = await AsyncStorage.getItem('@jwt');
-        var userID = jwt_decode(jwtToken).userId;
-
-        var rows = 7;
-        var cols = 48;
-
-        var weekTable = Array.from({ length: rows }, () => 
-            Array.from({ length: cols }, () => false)
-            );
-
-        for (var i = 0; i < rows; i++)
-        {
-            for (var j = 0; j < cols; j++)
-            {
-                weekTable[i][j] = week[j][i]
-            }
-        }
-
-        var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/createWeek', {
-            userID: userID,
-            week: weekTable,
-			jwtToken: jwtToken
-        });
-        
-		if (response.data.jwtToken)
-        {
-            await AsyncStorage.setItem('@jwt', response.data.jwtToken);
-        }
-
-        if (response.data.error) 
-		{
-			console.log(response.data.error);
-            setError(response.data.error);
-        }
     }
 
     // Connect to the viewEvent API, and store all the data about the event with the id "key"
@@ -200,67 +144,38 @@ export default function SetEventAvail({ navigation, route }) {
         <View>
             {
                 !loading &&
-                <View>
-                    <View style={{width: "100%"}}>
-                        <Button 
-                            title="Set My Typical Week" 
-                            style={button} 
-                            color="#485063" 
-                            onPress={() => SetWeek()}
-                        />
-                    </View>
+                <View style={form_full}>
+                    <ScrollView contentContainerStyle={scrollview} vertical={true}>
+                        
 
-                    <ScrollView contentContainerStyle={scrollview} horizontal={true}>
+                <View style={{flexDirection: "row"}}>
+                    <View style = {{width: "100%"}}>
+                        <Button
+                            onPress={() => SendWeek()}
+                            title="Submit"
+                            color="#841584"
+                            style={button}
+                        /> 
+                    </View>
+                </View>
+                        
                         <View>
                             <Table borderStyle={{borderWidth: 1, borderColor: '#485063'}}>
-                                <Row data={["Time","Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} style={HeadStyle} textStyle={centeredText}/>
+                                <Row data={["Time","Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={HeadStyle} textStyle={centeredText}/>
                             </Table>
                             <ScrollView style={dataWrapper}>
                                 <Table borderStyle={{borderWidth: 1, borderColor: '#485063'}}>
                                     <Rows data={availabilityTable} 
                                     style={row}
-                                    widthArr={[48,48,48,48,48,48,48,48]}
+                                    widthArr={widthArray}
                                     textStyle={centeredText}/>
                                 </Table>
                             </ScrollView>
                         </View>
-                        <Button
-                            onPress={Submit}
-                            title="Submit"
-                            color="#841584"
-                            accessibilityLabel="Submit button"
-                        />
-
                     </ScrollView>
                 </View>
                 
             }
         </View>            
 	);
-
-    return (
-        <View style={form_full}>
-            <ScrollView contentContainerStyle={scrollview}>
-                <RadioForm
-                    radio_props={radio_props}
-                    initial={0}
-                    labelHorizontal={false}
-                    onPress={val => setEnablecustom(val)}
-                />
-                {
-                    enableCustom ? (
-                        <Text>Availability Input goes here</Text>
-                    ) : (
-                        <Text></Text>
-                    )
-                }
-                <Button
-                    onPress={Submit}
-                    title="Submit"
-                    color="#841584"
-                    accessibilityLabel="Submit button"
-                />
-            </ScrollView>
-        </View>
-    );
 }
