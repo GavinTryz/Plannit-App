@@ -18,7 +18,7 @@ export default function InviteUsers ({navigation, route}) {
     const { form, section, redTextStyle, button, myEventListContainer, myEventListTitle } = styles;
 
     //var myVar = [];
-    const [myVar, setMyVar] = useState(["fakeString"]);
+    const [myVar, setMyVar] = useState([]);
 
     const SendInvite = async () => {
 

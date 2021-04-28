@@ -40,7 +40,7 @@ export default function Login ({navigation}) {
     }
     */
 
-    const { form, section, errorTextStyle, centeredText, redTextStyle } = styles;
+    const { form, section, errorTextStyle, centeredText, redTextStyle, textLink } = styles;
 
     return (
         <View style={form}>
@@ -74,9 +74,6 @@ export default function Login ({navigation}) {
             </View>
 
             <View style={centeredText}>
-                <Text style={errorTextStyle}>
-                    {error}
-                </Text>
                 <Text/>
                 <Text
                     onPress={() => navigation.navigate('Send Reset')}
