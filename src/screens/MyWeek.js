@@ -42,7 +42,7 @@ export default function MyWeek ({navigation, route}) {
 
         for (var i = 0; i < rows; i++)
         {
-            table[i][0] = times[i];
+            table[i][0] = times[times.length - 1 - i];
             for (var j = 0; j < cols; j++)
             {
 

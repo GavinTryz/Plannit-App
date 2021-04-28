@@ -134,7 +134,7 @@ export default function ViewEvent ({navigation, route}) {
         );
 
 		for(let i = 0; i < rows; i++) {
-			finalTable[i][0] = times[i];
+			finalTable[i][0] = times[times.length - 1 - i];
 			for(let j = 0; j < cols; j++) {
 				if (availability[i][j] > 0) {	
 					var num = availability[i][j];

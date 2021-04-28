@@ -137,7 +137,7 @@ export default function SetEventAvail({ navigation, route }) {
 
         for (var i = 0; i < rows; i++)
         {
-            table[i][0] = times[i];
+            table[i][0] = times[times.length - 1 - i];
             for (var j = 0; j < cols; j++)
             {
                 table[i][j+1] = <WeekCell week={inputTable} row={i} col={j} setWeek={setAvailability}/>
