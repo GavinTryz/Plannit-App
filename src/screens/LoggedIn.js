@@ -59,7 +59,9 @@ export default function LoggedIn ({navigation}) {
 
     return (
         <View style={section_LoggedIn}>   
-            <ScrollView>
+            <ScrollView style={{
+                marginBottom:"3%",
+            }}>
                 <View style={section}>
                     <Input
                         placeholder="Event Name"

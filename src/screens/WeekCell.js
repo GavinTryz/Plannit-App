@@ -24,6 +24,14 @@ export default function WeekCell(props){
     }
     
     return(
-        <CheckBox disabled={false} onValueChange={(newValue) => handleChange(newValue)} value={checked}/>
+        <CheckBox
+            disabled={false}
+            onValueChange={(newValue) => handleChange(newValue)}
+            value={checked}
+            tintColors={{
+                true: '#e29476', 
+                false: '#ff7d5e',
+            }}
+        />
     );
 }

@@ -126,10 +126,11 @@ export default function MyWeek ({navigation, route}) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken);
         }
 
-        if (response.data.error) 
-		{
-			console.log(response.data.error);
+        if (response.data.error) {
+            console.log(response.data.error);
             setError(response.data.error);
+        } else {
+            navigation.navigate("My Events");
         }
     }
 
@@ -139,34 +140,39 @@ export default function MyWeek ({navigation, route}) {
         <View>
             {
                 !loading &&
-                <View>
+                <View style={{
+                    height:"100%",
+                }}>
                     <View style={{width: "100%"}}>
                         <Button 
                             title="Set My Typical Week" 
                             style={button} 
-                            color="#485063" 
+                            color="#e29476" 
                             onPress={() => SetWeek()}
                         />
                     </View>
 
                     <ScrollView horizontal={true}>
                         <View>
-                            <Table borderStyle={{borderWidth: 1, borderColor: '#485063'}}>
-                                <Row data={["Time","Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.centeredText}/>
+                            <Table borderStyle={{ borderWidth: 1, borderColor: '#d4d4d4'}}>
+                                <Row data={["Time", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.tableHeaderText}/>
                             </Table>
                             <ScrollView style={styles.dataWrapper}>
-                                <Table borderStyle={{borderWidth: 1, borderColor: '#485063'}}>
-                                    <Rows data={availabilityTable} 
+                                <Table
+                                    borderStyle={{
+                                        borderWidth: 1,
+                                        borderColor: '#d4d4d4',
+                                    }}
+                                >
+                                    <Rows data={availabilityTable}
                                     style={styles.row}
                                     widthArr={widthArray}
-                                    textStyle={styles.centeredText}/>
+                                    textStyle={styles.tableHeaderText}/>
                                 </Table>
                             </ScrollView>
                         </View>
-
                     </ScrollView>
                 </View>
-                
             }
         </View>            
 	);
