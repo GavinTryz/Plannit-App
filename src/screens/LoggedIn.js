@@ -49,7 +49,7 @@ export default function LoggedIn ({navigation}) {
         if (response.data.error) {
             setError(response.data.error);
         } else {
-            setName(response.data.creatorEvents.concat(response.data.participantEvents));
+            setName(response.data.participantEvents);
         }
     }
 

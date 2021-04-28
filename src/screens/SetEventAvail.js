@@ -9,8 +9,6 @@ import WeekCell from "./WeekCell"
 
 import jwt_decode from 'jwt-decode';
 
-//import { } from '../components/common';
-
 export default function SetEventAvail({ navigation, route }) {
     const { eventID, eventName } = route.params;
 
