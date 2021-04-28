@@ -9,42 +9,15 @@ import SendReset     from './screens/SendReset';
 import ResetPassword from './screens/ResetPassword';
 import LoggedIn      from './screens/LoggedIn';
 import NewEvent      from './screens/NewEvent';
-import ListEvents    from './screens/ListEvents';
 import MyWeek        from './screens/MyWeek';
-import TestScreen    from './screens/TestScreen';
 import ViewEvent     from './screens/ViewEvent';
 import InviteUsers   from './screens/InviteUsers';
+import SetEventAvail from './screens/SetEventAvail'
 
 const Stack = createStackNavigator();
 
-function App({navigation}) {
-    const [jwtToken,    setJwtToken]    = React.useState(null);
-    //const [firstRun,    setFirstrun]    = React.useState(true)
-
-    /*const SetJWT = (token, id) => {
-        var ud = jwt_decode(token);
-        setJwtToken(    token);
-        setFirstname(   ud.firstName);
-        setLastname(    ud.lastName);
-        setUserID(      ud.userId);        
-    }
-
-    const readItemFromStorage = async () => {
-        setFirstname(AsyncStorage.getItem('@firstName'));
-        setLastname(AsyncStorage.getItem('@lastName'));
-        setJwtToken(AsyncStorage.getItem('@jwtToken'));
-    };
-
-    const writeItemToStorage = async (first, last, jwt) => {
-        AsyncStorage.setItem('@firstName',   first);
-        AsyncStorage.setItem('@lastName',    last);
-        AsyncStorage.setItem('@jwtToken',    jwt);
-    };
-
-    useEffect(() => {
-        writeItemToStorage("john", "doe", "jwt");
-        readItemFromStorage;
-    });*/
+export default function App({navigation}) {
+    const [jwtToken, setJwtToken] = React.useState(null);
 
     return (
         <NavigationContainer>
@@ -69,10 +42,6 @@ function App({navigation}) {
                 </Stack.Navigator>
             ) : (
                 <Stack.Navigator initialRouteName = 'Login'>
-                    <Stack.Screen 
-                        name='TestScreen'
-                        component={TestScreen} 
-                    />
                     <Stack.Screen 
                         name='Login'
                         component={Login} 
@@ -109,10 +78,12 @@ function App({navigation}) {
                         name='Invite Users' 
                         component={InviteUsers} 
                     />
+                    <Stack.Screen 
+                        name='Set Event Availability' 
+                        component={SetEventAvail} 
+                    />
                 </Stack.Navigator>
             )}  
         </NavigationContainer>  
     );
 }
-
-export default App;

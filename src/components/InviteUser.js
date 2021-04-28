@@ -1,8 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export async function InviteUser(eventID, email, eventName)
-{
+export async function InviteUser(eventID, email, eventName) {
     var jwtToken = await AsyncStorage.getItem('@jwt');
 
     var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/inviteUser', {
@@ -12,8 +11,7 @@ export async function InviteUser(eventID, email, eventName)
         jwtToken: jwtToken
     });
     
-    if (response.data.jwtToken)
-    {
+    if (response.data.jwtToken) {
         await AsyncStorage.setItem('@jwt', response.data.jwtToken);    
     }
 

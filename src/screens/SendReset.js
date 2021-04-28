@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 
 import axios from 'axios';
 
-
 import { Input, Loading, Button } from '../components/common';
 import styles from "../styles/styles"
 
@@ -12,6 +11,8 @@ export default function Login ({navigation}) {
     const [error,       setError]       = useState('');
     const [loading,     setLoading]     = useState(false);
 
+    const { form, section, errorTextStyle } = styles;
+
     const SendReset = async () => {
         var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/sendReset', {
             email:      email
@@ -19,13 +20,10 @@ export default function Login ({navigation}) {
         
         setError(response.data.error);
 
-        if (response.data.error === "")
-        {
+        if (response.data.error === "") {
             navigation.navigate('Reset Password');
         }
     }
-
-    const { form, section, errorTextStyle, centeredText } = styles;
 
     return (
         <View style={form}>
@@ -48,7 +46,6 @@ export default function Login ({navigation}) {
                     :
                     <Loading size={'large'} />
                 }
-
             </View>
         </View>
     );

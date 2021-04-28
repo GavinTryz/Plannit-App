@@ -1,31 +1,32 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import { View, Text, Button, ScrollView, TouchableOpacity, StyleSheet }   from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import styles from "../styles/styles"
 
-import jwt_decode from 'jwt-decode';
+import jwt_decode	from 'jwt-decode';
+import axios		from 'axios';
 
-import axios from 'axios';
+import { Button }	from '../components/common';
+import styles		from "../styles/styles"
 
 export default function ViewEvent ({navigation, route}) {
-	const {eventName, _id} = route.params; // Key is the event ID
+	const { eventName, _id } = route.params; // Key is the event ID
 
-    const {button} = styles; 
+	const [weekly,				setWeekly]				= useState(false);
+    const [startTime,			setStartTime]			= useState('');
+    const [endTime,				setEndTime]				= useState('');
+	const [error,				setError]				= useState('');
+	const [participants,		setParticipants]		= useState([]);
+    const [daysOfWeek,			setDaysOfWeek]			= useState([]);
+	const [eventTime,			setEventTime]			= useState([]);
+	const [availabilityTable,	setAvailabilityTable]	= useState([[]]);
 
-	const [participants, setParticipants] = useState([]);
-    const [weekly, setWeekly] = useState(false);
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
-    const [daysOfWeek, setDaysOfWeek] = useState([]);
-	const [eventTime, setEventTime] = useState([]);
-	const [availabilityTable, setAvailabilityTable] = useState([[]]);
-    const [error, setError] = useState('');
+	const { button } = styles;
 
 	useEffect(() => {
 		ViewEvent();
-		while (!participants)
-		{
+		while (!participants) {
 
 		}
 		createTable();
@@ -39,32 +40,27 @@ export default function ViewEvent ({navigation, route}) {
 			jwtToken: jwtToken
         });
         
-		if (response.data.jwtToken)
-        {
+		if (response.data.jwtToken) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken);
         }
 
-        if (response.data.error) 
-		{
-			console.log(response.data.error);
-            setError(response.data.error);
-        }
-        else
-        {
-			setParticipants(response.data.participants);
-			setWeekly(response.data.weekly);
-			setStartTime(response.data.startTime);
-			setEndTime(response.data.endTime);
+        if (response.data.error) {
+			console.log	(response.data.error);
+            setError	(response.data.error);
+        } else {
+			setParticipants	(response.data.participants);
+			setWeekly		(response.data.weekly);
+			setStartTime	(response.data.startTime);
+			setEndTime		(response.data.endTime);
 
-			setDaysOfWeek(response.data.daysOfWeek);
-			setEventTime(response.data.eventTime);
+			setDaysOfWeek	(response.data.daysOfWeek);
+			setEventTime	(response.data.eventTime);
         }
     }
 
-	function convertDays(daysObject)
-	{
-	}
+	function convertDays(daysObject) {
 
+	}
 
 	const DeleteEvent = async () => {
 		var jwtToken = await AsyncStorage.getItem('@jwt');
@@ -74,13 +70,11 @@ export default function ViewEvent ({navigation, route}) {
 			jwtToken: jwtToken
         });
         
-		if (response.data.jwtToken)
-        {
+		if (response.data.jwtToken) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken);
         }
 
-        if (response.data.error) 
-		{
+        if (response.data.error) {
             setError(response.data.error);
         }
     }
@@ -95,24 +89,19 @@ export default function ViewEvent ({navigation, route}) {
 			jwtToken: jwtToken
         });
         
-		if (response.data.jwtToken)
-        {
+		if (response.data.jwtToken) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken);
         }
 
-        if (response.data.error) 
-		{
-			console.log(response.data.error);
-            setError(response.data.error);
-        }
-		else
-		{
+        if (response.data.error) {
+			console.log	(response.data.error);
+            setError	(response.data.error);
+        } else {
 			navigation.navigate('My Events');
 		}
     }
 
-	function createTable()
-	{
+	function createTable() {
 		const rows = 48;
         const cols = 7;
 
@@ -120,14 +109,10 @@ export default function ViewEvent ({navigation, route}) {
         Array.from({ length: cols }, () => 0)
         );
 
-        for(let i = 0; i < participants.length; i++)
-        {
-            for(let row = 0; row < rows; row++)
-            {
-                for(let col = 0; col < cols; col++)
-                {
-                    if(participants[i].availability[col][row])
-                    {
+		for (let i = 0; i < participants.length; i++) {
+			for (let row = 0; row < rows; row++) {
+				for (let col = 0; col < cols; col++) {
+                    if(participants[i].availability[col][row]) {
                         availability[row][col]++;
                     }
                 }
@@ -135,15 +120,12 @@ export default function ViewEvent ({navigation, route}) {
         }
 
 		var finalTable = Array.from({ length: rows }, () => 
-        Array.from({ length: cols }, () => '')
+			Array.from({ length: cols }, () => '')
         );
 
-		for(let i = 0; i < rows; i++)
-		{
-			for(let j = 0; j < cols; j++)
-			{
-				if (availability[i][j] > 0)
-				{	
+		for(let i = 0; i < rows; i++) {
+			for(let j = 0; j < cols; j++) {
+				if (availability[i][j] > 0) {	
 					var num = availability[i][j];
 					finalTable[i][j] = num.toString();
 				}
@@ -151,7 +133,6 @@ export default function ViewEvent ({navigation, route}) {
 		}
 
 		setAvailabilityTable(finalTable);
-		
 	}
 
 	const ChooseTime = async () => {
@@ -163,13 +144,11 @@ export default function ViewEvent ({navigation, route}) {
 			jwtToken: jwtToken
         });
         
-		if (response.data.jwtToken)
-        {
+		if (response.data.jwtToken) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken);
         }
 
-        if (response.data.error) 
-		{
+        if (response.data.error) {
             setError(response.data.error);
         }
     }
@@ -179,24 +158,23 @@ export default function ViewEvent ({navigation, route}) {
 	return (
 		<View>
             <View style={{flexDirection: "row"}}>
-                    <View style = {{width: "50%"}}>
-                        <Button
-                            title="Invite Users" 
-                            style={button} 
-                            color="#485063" 
-                            onPress={() => navigation.navigate('Invite Users', {eventName, _id})}
-                        />
-                    </View>
-                    <View style={{width: "50%"}}>
-                        <Button 
-                            title="Leave Event" 
-                            style={button} 
-                            color="#ed523e" 
-                            onPress={() => LeaveEvent()}
-                        />
-                    </View>
-                    
+                <View style = {{width: "50%"}}>
+                    <Button
+                        title="Invite Users" 
+                        style={button} 
+                        color="#485063" 
+                        onPress={() => navigation.navigate('Invite Users', {eventName, _id})}
+                    />
                 </View>
+                <View style={{width: "50%"}}>
+                    <Button 
+                        title="Leave Event" 
+                        style={button} 
+                        color="#ed523e" 
+                        onPress={() => LeaveEvent()}
+                    />
+                </View>
+            </View>
 
 			<ScrollView horizontal={true}>
                     <View>
@@ -245,7 +223,6 @@ export default function ViewEvent ({navigation, route}) {
 					</View>
 					</ScrollView>
 			</View>*/}
-			
 		</View>
 	);
 }

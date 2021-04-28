@@ -7,8 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint .",
-    "android-windows": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.2",
@@ -30,7 +29,10 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.1.0",
     "react-native-selectable-grid": "^0.3.1",
-    "react-native-table-component": "^1.2.1"
+    "react-native-simple-radio-button": "^2.7.4",
+    "react-native-table-component": "^1.2.1",
+    "stre": "^0.0.2",
+    "util": "^0.12.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
