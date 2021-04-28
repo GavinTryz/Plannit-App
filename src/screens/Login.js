@@ -24,6 +24,7 @@ export default function Login ({navigation}) {
         
         if (response.data.jwtToken) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken); 
+            setError("");
             navigation.navigate('My Events'); // Previously called Home
         } else {
             setError(response.data.error);
