@@ -129,10 +129,14 @@ export default styles = StyleSheet.create({
         height: 40, 
         backgroundColor: '#F7F8FA'
     },
+    col: { 
+        width: 50, 
+        backgroundColor: '#F7F8FA'
+    },
     HeadStyle: { 
         height: 50,
         alignContent: "center",
-        backgroundColor: '#ffe0f0'
+        backgroundColor: '#FFFFFF'
     },
     TableText: { 
         margin: 10
