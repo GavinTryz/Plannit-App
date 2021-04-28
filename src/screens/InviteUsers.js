@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList, ScrollView } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -15,22 +15,14 @@ export default function InviteUsers ({navigation, route}) {
     const [error,       setError]       = useState('');
     const [loading,     setLoading]     = useState(false);
 
-    const { form, section, errorTextStyle, button } = styles;
+    const { form, section, redTextStyle, button, myEventListContainer, myEventListTitle } = styles;
+
+    //var myVar = [];
+    const [myVar, setMyVar] = useState(["fakeString"]);
 
     const SendInvite = async () => {
 
         console.log("Clicked Invite User, inviting: " + email)
-
-        // var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/sendReset', {
-        //     email:      email
-        // });
-        
-        // setError(response.data.error);
-
-        // if (response.data.error === "")
-        // {
-        //     navigation.navigate('Reset Password');
-        // }
 
         var jwtToken = await AsyncStorage.getItem('@jwt');
         var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/inviteUser', {
@@ -47,16 +39,18 @@ export default function InviteUsers ({navigation, route}) {
         if (response.data.error) {
             setError(response.data.error);
         } else {
-
+            setError("");
+            //myVar.push(email);
+            var tmp = myVar;
+            tmp.push(email);
+            setMyVar(tmp);
+            console.log(myVar);
         }
-
-        setError(response.data.error);
-        console.log("Got an error back >" + error + "<");
     }
 
     return (
         <View style={form}>
-            <View>
+            <ScrollView>
                 <View style={section}>
                     <Input
                         placeholder="user@email.com"
@@ -66,7 +60,7 @@ export default function InviteUsers ({navigation, route}) {
                     />
                 </View>
 
-                <Text style={errorTextStyle}>
+                <Text style={redTextStyle}>
                     {error}
                 </Text>
 
@@ -75,7 +69,20 @@ export default function InviteUsers ({navigation, route}) {
                     :
                     <Loading size={'large'} />
                 }
-            </View>
+                <View>
+                    <FlatList
+                        extraData={myVar}
+                        style={myEventListContainer}
+                        keyExtractor={(item, i) => i.toString()}
+                        data={myVar}
+                        renderItem={({item}) => (
+                            <Text style={myEventListTitle}>{item}</Text>
+                        )}
+                    />
+                </View>
+
+                    
+            </ScrollView>
         </View>
     );
 }

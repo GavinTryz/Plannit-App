@@ -40,7 +40,7 @@ export default function Login ({navigation}) {
     }
     */
 
-    const { form, section, errorTextStyle, centeredText } = styles;
+    const { form, section, errorTextStyle, centeredText, redTextStyle } = styles;
 
     return (
         <View style={form}>
@@ -64,7 +64,7 @@ export default function Login ({navigation}) {
                     />
                 </View>
 
-                <Text style={errorTextStyle}>
+                <Text style={redTextStyle}>
                     {error}
                 </Text>
 

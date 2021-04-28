@@ -90,4 +90,9 @@ export default styles = StyleSheet.create({
         borderColor: '#ddd',
         borderBottomWidth: 2,
     },
+    redTextStyle: {
+        alignSelf: 'center',
+        fontSize: 18,
+        color: 'red',
+    }
 })
