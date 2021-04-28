@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Button } from 'react-native';
 
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,7 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import jwt_decode	from 'jwt-decode';
 import axios		from 'axios';
 
-import { Button }	from '../components/common';
 import styles		from "../styles/styles"
 
 export default function ViewEvent ({navigation, route}) {
@@ -185,22 +184,21 @@ export default function ViewEvent ({navigation, route}) {
 					</View>
 
 					<ScrollView horizontal={true}>
-							<View>
-								<Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
-									<Row data={["Time", "Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.TableText}/>
+						<View>
+							<Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
+								<Row data={["Time", "Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.TableText}/>
+							</Table>
+							<ScrollView style={styles.dataWrapper}>
+								<Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
+									<Rows data={availabilityTable} 
+									style={styles.row}
+									widthArr={widthArray}
+									textStyle={styles.centeredText}/>
 								</Table>
-								<ScrollView style={styles.dataWrapper}>
-									<Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-										<Rows data={availabilityTable} 
-										style={styles.row}
-										widthArr={widthArray}
-										textStyle={styles.centeredText}/>
-									</Table>
-								</ScrollView>
-							</View>
+							</ScrollView>
+						</View>
 					</ScrollView>
 				</View>
-                
             }
 		</View>
 	);
