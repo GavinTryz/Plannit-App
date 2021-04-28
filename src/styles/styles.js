@@ -11,6 +11,8 @@ export default styles = StyleSheet.create({
         borderColor: '#ddd',
         textAlign: 'center',
         alignItems: 'stretch',
+        backgroundColor: '#35405d',
+        flex: 1,
     },
     section: {
         flexDirection: 'row',
@@ -21,73 +23,91 @@ export default styles = StyleSheet.create({
     },
     section_LoggedIn: {
         borderBottomWidth: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#35405d',
         borderColor: '#ddd',
         flex: 1
     },
     button: {
         marginTop: 10,
         marginBottom: 10,
-		padding: 10
+        padding: 10
     },
     form_full: {
-        borderColor: '#ddd',
-        alignItems:'center',
+        alignItems: 'stretch',
         //justifyContent: 'center',
-        //flex: 1,
+        flex: 1,
+        backgroundColor: '#35405d',
     },
     horizontalRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '50%',
+        width: '70%',
+        backgroundColor: "#a4acc0",
+        marginBottom: "2%",
     },
     myEventListContainer: {
-		flex: 1,
-		//backgroundColor: '#fff',
-		paddingTop: 40,
-		paddingHorizontal: 20
-	},
-	myEventListTitle: {
-		marginTop: 24,
-		padding: 30,
-		backgroundColor: '#E5E5E5',
-		fontSize: 24
-	},
-    tableContainer: { 
-        flex: 1, 
-        padding: 16, 
-        paddingTop: 30, 
-        backgroundColor: '#ffffff' 
+        flex: 1,
+        //backgroundColor: '#fff',
+        paddingTop: 40,
+        paddingHorizontal: 20
     },
-    head: { 
-        height: 50, 
-        backgroundColor: '#6F7BD9' 
+    myEventListTitle: {
+        marginTop: 24,
+        padding: 30,
+        backgroundColor: '#E5E5E5',
+        fontSize: 24,
+        textAlign: "center",
     },
-    text: { 
-        textAlign: 'center', 
-        fontWeight: '200' 
+    tableContainer: {
+        flex: 1,
+        padding: 16,
+        paddingTop: 30,
+        backgroundColor: '#ffffff'
     },
-    dataWrapper: { 
-        marginTop: -1 
+    head: {
+        height: 50,
+        backgroundColor: '#6F7BD9'
     },
-    row: { 
-        height: 40, 
+    text: {
+        textAlign: 'center',
+        fontWeight: '200'
+    },
+    dataWrapper: {
+        marginTop: -1
+    },
+    row: {
+        height: 40,
         backgroundColor: '#F7F8FA'
     },
-    HeadStyle: { 
+    HeadStyle: {
         height: 50,
         alignContent: "center",
         backgroundColor: '#ffe0f0'
     },
-    TableText: { 
+    TableText: {
         margin: 10
     },
     scrollview: {
         alignItems: 'center',
     },
     picker: {
-        width: "80%",
-        borderColor: '#ddd',
-        borderBottomWidth: 2,
+        width: "70%",
+        backgroundColor: "#a4acc0",
+        marginBottom: "2%",
+    },
+    textLink: {
+        color: '#ff7d5e',
+        textDecorationLine: 'underline',
+        fontSize: 18,
+    },
+    headerStyle: {
+        backgroundColor: '#1f2637',
+    },
+    headerTitleStyle: {
+        color: '#fff',
+    },
+    newEventText: {
+        fontSize: 20,
+        marginLeft: "5%"
     },
 })

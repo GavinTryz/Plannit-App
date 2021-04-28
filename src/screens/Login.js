@@ -40,7 +40,7 @@ export default function Login ({navigation}) {
     }
     */
 
-    const { form, section, errorTextStyle, centeredText } = styles;
+    const { form, section, errorTextStyle, centeredText, textLink } = styles;
 
     return (
         <View style={form}>
@@ -64,23 +64,31 @@ export default function Login ({navigation}) {
                     />
                 </View>
 
+                <Text />
+
+                <Button onPress={RequestLogin}>
+                    Login
+                </Button>
+            </View>
+
+            <View style={centeredText}>
                 <Text style={errorTextStyle}>
                     {error}
                 </Text>
-
-                <Button onPress={RequestLogin}> Login </Button>
-            </View>
-
-            <View style={centeredText}>
-                <TextLink onPress={() => navigation.navigate('Send Reset')}>
+                <Text/>
+                <Text
+                    onPress={() => navigation.navigate('Send Reset')}
+                    style={textLink}
+                >
                     Forgot Password
-                </TextLink>
-            </View>
-
-            <View style={centeredText}>
-                <TextLink onPress={() => navigation.navigate('Register')}>
+                </Text>
+                <Text/>
+                <Text
+                    onPress={() => navigation.navigate('Register')}
+                    style={textLink}
+                >
                     Don't have an account? Register!
-                </TextLink>
+                </Text>
             </View>
         </View>
     );

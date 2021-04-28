@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, ScrollView, TouchableOpacity } from 'react-native';
 
-//import { LongPressGestureHandler }  from 'react-native-gesture-handler';
-import AsyncStorage                 from '@react-native-async-storage/async-storage';
-
-//import 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import jwt_decode   from 'jwt-decode';
 import axios        from 'axios';
@@ -72,22 +69,42 @@ export default function LoggedIn ({navigation}) {
                     />
                 </View>
 
-                <Button onPress={SearchEvents} title="Search"> Search </Button>
+                <View style={{
+                    width: "90%",
+                    alignSelf: "center",
+                    marginTop: "5%",
+                }}>
+                    <Button
+                        onPress={SearchEvents}
+                        title="Search"
+                        color="#e29476"
+                    > 
+                    </Button>
+                </View>
 
-                <View style={{flexDirection: "row"}}>
-                    <View style = {{width: "50%"}}>
+                <Text />
+
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                }}>
+                    <View style={{
+                        width: "40%",
+                    }}>
                         <Button
                             title="New Event" 
                             style={button} 
-                            color="#485063" 
+                            color="#e29476" 
                             onPress={() => navigation.navigate('New Event')}
                         />
                     </View>
-                    <View style={{width: "50%"}}>
+                    <View style={{
+                        width: "40%",
+                    }}>
                         <Button 
                             title="My Typical Week" 
                             style={button} 
-                            color="#485063" 
+                            color="#e29476" 
                             onPress={() => navigation.navigate('My Typical Week')}
                         />
                     </View>
@@ -97,7 +114,11 @@ export default function LoggedIn ({navigation}) {
                     { myEvents.map((item) => {
                         return(
                             <View key={item._id}>
-                                <TouchableOpacity onPress={() => navigation.navigate('View Event', item)}>
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate('View Event', item)}
+                                    style={{
+                                    }}
+                                >
                                     <Text style = {styles.myEventListTitle}>{item.eventName}</Text>
                                 </TouchableOpacity>
                             </View>
