@@ -38,65 +38,67 @@ export default function Register ({navigation}) {
     }
 
 
-   const { form, section, errorTextStyle, centeredText } = styles;
+    const { form, section, errorTextStyle, centeredText, textLink  } = styles;
 
-   return (
-        <View>
-            <View style={form}>
-                <View style={section}>
-                    <Input
-                        placeholder="john"
-                        label="First Name"
-                        value={firstname}
-                        onChangeText={setFirstname}
-                    />
-                </View>
+    return (
+        <View style={form}>
+            <View style={section}>
+                <Input
+                    placeholder="john"
+                    label="First Name"
+                    value={firstname}
+                    onChangeText={setFirstname}
+                />
+            </View>
 
-                <View style={section}>
-                    <Input
-                        placeholder="doe"
-                        label="Last Name"
-                        value={lastname}
-                        onChangeText={setLastname}
-                    />
-                </View>
+            <View style={section}>
+                <Input
+                    placeholder="doe"
+                    label="Last Name"
+                    value={lastname}
+                    onChangeText={setLastname}
+                />
+            </View>
               
-                <View style={section}>
-                    <Input
-                        placeholder="user@email.com"
-                        label="Email"
-                        value={email}
-                        onChangeText={setEmail}
-                    />
-                </View>
+            <View style={section}>
+                <Input
+                    placeholder="user@email.com"
+                    label="Email"
+                    value={email}
+                    onChangeText={setEmail}
+                />
+            </View>
 
-                <View style={section}>
-                    <Input
-                        secureTextEntry
-                        placeholder="password"
-                        label="Password"
-                        value={password}
-                        onChangeText={setPassword}
-                    />
-                </View>
+            <View style={section}>
+                <Input
+                    secureTextEntry
+                    placeholder="password"
+                    label="Password"
+                    value={password}
+                    onChangeText={setPassword}
+                />
+            </View>
 
+            <Text />
+            
+
+            {!loading ?
+                <Button onPress={register}> Register </Button>
+                :
+                <Loading size={'large'} />
+            }
+            <View style={centeredText}>
                 <Text style={errorTextStyle}>
                     {error}
                 </Text>
-
-                {!loading ?
-                    <Button onPress={register}> Register </Button>
-                    :
-                    <Loading size={'large'} />
-                }
-
-            </View>
-
-            <View style={centeredText}>
-                <TextLink onPress={() => navigation.navigate('Login')}>
+                <Text />
+                <Text 
+                    onPress={() => navigation.navigate('Login')}
+                    style={textLink}
+                    >
                     Already have an account? Log in!
-                </TextLink>
+                </Text>
             </View>
         </View>
-   );
+    );
 }

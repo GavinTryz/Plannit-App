@@ -25,7 +25,7 @@ export default function NewEvent ({navigation}) {
 	const [saturday,	setSaturday]	= useState(false);
 	const [sunday,		setSunday]		= useState(false);
 
-	const { form_full, horizontalRow, checkbox, scrollview, picker } = styles;
+	const { form_full, horizontalRow, checkbox, scrollview, picker, newEventText } = styles;
 
 	const CreateEvent = async () => {
 		var jwtToken = await AsyncStorage.getItem('@jwt');
@@ -38,7 +38,7 @@ export default function NewEvent ({navigation}) {
 		thursday	? daysOfWeek.push("Thursday")	: null;
 		friday		? daysOfWeek.push("Friday")		: null;
 		saturday	? daysOfWeek.push("Saturday")	: null;
-		sunday		? daysOfWeek.push("Sundayter")	: null;
+		sunday		? daysOfWeek.push("Sunday")		: null;
 
 		var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/createEvent', {
 			creatorID:	userID,
@@ -64,12 +64,12 @@ export default function NewEvent ({navigation}) {
 				eventName:	eventName,
 			});
 		}
-		
 	}
 
 	return (
 		<View style={form_full} >
 			<ScrollView contentContainerStyle={scrollview}>
+				<Text/>
 				<View style={horizontalRow}>
 					<Input
 						placeholder="My Event"
@@ -204,7 +204,7 @@ export default function NewEvent ({navigation}) {
 				</View>
 
 				<View style={horizontalRow}>
-					<Text style={{ fontSize: 18 }}>Weekly</Text>
+					<Text style={newEventText}>Weekly</Text>
 					<CheckBox
 						value={weekly}
 						onValueChange={(newValue) => setWeekly(newValue)}
@@ -213,7 +213,7 @@ export default function NewEvent ({navigation}) {
 				</View>
 				
 				<View style={horizontalRow}>
-					<Text style={{ fontSize: 18 }}>Monday</Text>
+					<Text style={newEventText}>Monday</Text>
 					<CheckBox
 						value={monday}
 						onValueChange={(newValue) => setMonday(newValue)}
@@ -222,7 +222,7 @@ export default function NewEvent ({navigation}) {
 				</View>
 
 				<View style={horizontalRow}>
-					<Text style={{fontSize:18}}>Tuesday</Text>
+					<Text style={newEventText}>Tuesday</Text>
 					<CheckBox
 						value={tuesday}
 						onValueChange={(newValue) => setTuesday(newValue)}
@@ -231,7 +231,7 @@ export default function NewEvent ({navigation}) {
 				</View>
 
 				<View style={horizontalRow}>
-					<Text style={{fontSize:18}}>Wednesday</Text>
+					<Text style={newEventText}>Wednesday</Text>
 					<CheckBox
 						value={wednesday}
 						onValueChange={(newValue) => setWednesday(newValue)}
@@ -240,7 +240,7 @@ export default function NewEvent ({navigation}) {
 				</View>
 
 				<View style={horizontalRow}>
-					<Text style={{ fontSize: 18 }}>Thursday</Text>
+					<Text style={newEventText}>Thursday</Text>
 					<CheckBox
 						value={thursday}
 						onValueChange={(newValue) => setThursday(newValue)}
@@ -249,7 +249,7 @@ export default function NewEvent ({navigation}) {
 				</View>
 
 				<View style={horizontalRow}>
-					<Text style={{ fontSize: 18 }}>Friday</Text>
+					<Text style={newEventText}>Friday</Text>
 					<CheckBox
 						value={friday}
 						onValueChange={(newValue) => setFriday(newValue)}
@@ -258,7 +258,7 @@ export default function NewEvent ({navigation}) {
 				</View>
 
 				<View style={horizontalRow}>
-					<Text style={{ fontSize: 18 }}>Saturday</Text>
+					<Text style={newEventText}>Saturday</Text>
 					<CheckBox
 						value={saturday}
 						onValueChange={(newValue) => setSaturday(newValue)}
@@ -267,7 +267,7 @@ export default function NewEvent ({navigation}) {
 				</View>
 
 				<View style={horizontalRow}>
-					<Text style={{ fontSize: 18 }}>Sunday</Text>
+					<Text style={newEventText}>Sunday</Text>
 					<CheckBox
 						value={sunday}
 						onValueChange={(newValue) => setSunday(newValue)}
@@ -275,16 +275,9 @@ export default function NewEvent ({navigation}) {
 					/>
 				</View>
 
-				<Button
-					onPress={CreateEvent}
-					title="Create Event"
-					color="#841584"
-					accessibilityLabel="Create Event button"
-					style={{
-						height: '10%',
-
-					}}
-				/>
+				<Button onPress={CreateEvent}> 
+					Create
+				</Button>
 			</ScrollView>
 		</View>
 	);
