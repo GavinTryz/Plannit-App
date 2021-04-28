@@ -50,37 +50,24 @@ export default function InviteUsers ({navigation, route}) {
 
     return (
         <View style={form}>
-            <ScrollView>
-                <View style={section}>
-                    <Input
-                        placeholder="user@email.com"
-                        label="Email"
-                        value={email}
-                        onChangeText={setEmail}
-                    />
-                </View>
+            <View style={section}>
+                <Input
+                    placeholder="user@email.com"
+                    label="Email"
+                    value={email}
+                    onChangeText={setEmail}
+                />
+            </View>
 
-                <Text style={redTextStyle}>
-                    {error}
-                </Text>
+            <Text style={redTextStyle}>
+                {error}
+            </Text>
 
-                {!loading ?
-                    <Button style={button} onPress={SendInvite}> Invite User </Button>
-                    :
-                    <Loading size={'large'} />
-                }
-                <View>
-                    <FlatList
-                        extraData={myVar}
-                        style={myEventListContainer}
-                        keyExtractor={(item, i) => i.toString()}
-                        data={myVar}
-                        renderItem={({item}) => (
-                            <Text style={myEventListTitle}>{item}</Text>
-                        )}
-                    />
-                </View>
-            </ScrollView>
+            {!loading ?
+                <Button style={button} onPress={SendInvite}> Invite User </Button>
+                :
+                <Loading size={'large'} />
+            }
         </View>
     );
 }
