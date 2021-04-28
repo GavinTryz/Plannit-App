@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import axios from 'axios';
+
 import { Input, Loading, Button } from '../components/common';
 import styles from "../styles/styles"
 
@@ -11,6 +14,8 @@ export default function InviteUsers ({navigation, route}) {
     const [email,       setEmail]       = useState('');
     const [error,       setError]       = useState('');
     const [loading,     setLoading]     = useState(false);
+
+    const { form, section, errorTextStyle, button } = styles;
 
     const SendInvite = async () => {
 
@@ -35,25 +40,19 @@ export default function InviteUsers ({navigation, route}) {
             eventName: eventName
         });
 
-        if (response.data.jwtToken)
-        {
+        if (response.data.jwtToken) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken);
         }
 
         if (response.data.error) {
             setError(response.data.error);
-        }
-        else
-        {
+        } else {
 
         }
 
         setError(response.data.error);
         console.log("Got an error back >" + error + "<");
-        
     }
-	
-    const { form, section, errorTextStyle, centeredText, button } = styles;
 
     return (
         <View style={form}>
@@ -76,7 +75,6 @@ export default function InviteUsers ({navigation, route}) {
                     :
                     <Loading size={'large'} />
                 }
-
             </View>
         </View>
     );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Switch, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import CheckBox			from '@react-native-community/checkbox';
 import { Picker }		from '@react-native-picker/picker';
@@ -25,57 +25,29 @@ export default function NewEvent ({navigation}) {
 	const [saturday,	setSaturday]	= useState(false);
 	const [sunday,		setSunday]		= useState(false);
 
-	const { form_full, section, errorTextStyle, section2, bordered, horizontalRow, checkbox, scrollview, picker } = styles;
+	const { form_full, horizontalRow, checkbox, scrollview, picker } = styles;
 
 	const CreateEvent = async () => {
 		var jwtToken = await AsyncStorage.getItem('@jwt');
 		var userID = jwt_decode(jwtToken).userId;
 
 		var daysOfWeek = [];
-
-		if (monday)
-		{
-			daysOfWeek.push("Monday");
-		}
-
-		if (tuesday)
-		{
-			daysOfWeek.push("Tuesday");
-		}
-		
-		if (wednesday)
-		{
-			daysOfWeek.push("Wednesday");
-		}
-		
-		if (thursday)
-		{
-			daysOfWeek.push("Thursday");
-		}
-		
-		if (friday)
-		{
-			daysOfWeek.push("Friday");
-		}
-		
-		if (saturday)
-		{
-			daysOfWeek.push("Saturday");
-		}
-
-		if (sunday)
-		{
-			daysOfWeek.push("Sunday");
-		}
+		monday		? daysOfWeek.push("Monday")		: null;
+		tuesday		? daysOfWeek.push("Tuesday")	: null;
+		wednesday	? daysOfWeek.push("Wednesday")	: null;
+		thursday	? daysOfWeek.push("Thursday")	: null;
+		friday		? daysOfWeek.push("Friday")		: null;
+		saturday	? daysOfWeek.push("Saturday")	: null;
+		sunday		? daysOfWeek.push("Sundayter")	: null;
 
 		var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/createEvent', {
-			creatorID: userID,
-			eventName: eventName,
-			startTime: startTime,
-			endTime: endTime,
-			weekly: weekly,
+			creatorID:	userID,
+			eventName:	eventName,
+			startTime:	startTime,
+			endTime:	endTime,
+			weekly:		weekly,
 			daysOfWeek: daysOfWeek,
-			jwtToken: jwtToken
+			jwtToken:	jwtToken
 		});
 
 		if (response.data.jwtToken) {
@@ -93,7 +65,6 @@ export default function NewEvent ({navigation}) {
 				eventName:	eventName,
 			});
 		}
-
 		
 	}
 

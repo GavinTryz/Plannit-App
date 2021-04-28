@@ -4,6 +4,8 @@ import { View, Text, Switch, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
+import jwt_decode from 'jwt-decode';
+
 import { Input, TextLink, Loading, Button } from '../components/common';
 
 export default function SetEventAvail({ navigation, route }) {
@@ -64,7 +66,7 @@ export default function SetEventAvail({ navigation, route }) {
         }
         SendWeek();
 
-        navigation.navigate('Home');
+        navigation.navigate('My Events');
     }
 
     return (
