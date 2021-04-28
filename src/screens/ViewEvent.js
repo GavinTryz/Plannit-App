@@ -173,7 +173,7 @@ export default function ViewEvent ({navigation, route}) {
                     <Button
                         title="Invite Users" 
                         style={button} 
-                        color="#485063" 
+						color="#e29476" 
                         onPress={() => navigation.navigate('Invite Users', {eventName, _id})}
                     />
                 </View>
@@ -205,18 +205,18 @@ export default function ViewEvent ({navigation, route}) {
 				<View style={{
 					alignContent: "center",
 				}}>
-                        <Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
-                            <Row data={["Time", "Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.TableText}/>
+					<Table borderStyle={{ borderWidth: 1, borderColor: '#d4d4d4'}}>
+						<Row data={["Time", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={styles.HeadStyle} textStyle={styles.tableHeaderText}/>
+                    </Table>
+                    <ScrollView style={styles.dataWrapper}>
+                        <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
+                            <Rows data={availabilityTable} 
+							style={styles.row}
+							widthArr={widthArray}
+							textStyle={styles.tableHeaderText}/>
                         </Table>
-                        <ScrollView style={styles.dataWrapper}>
-                            <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-                                <Rows data={availabilityTable} 
-								style={styles.row}
-								widthArr={widthArray}
-                                textStyle={styles.centeredText}/>
-                            </Table>
-                        </ScrollView>
-                    </View>
+                    </ScrollView>
+                </View>
 			</ScrollView>
 		</View>	
 

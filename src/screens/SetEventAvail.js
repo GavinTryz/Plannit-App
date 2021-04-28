@@ -23,7 +23,7 @@ export default function SetEventAvail({ navigation, route }) {
     "6:00 AM", "5:30 AM", "5:00 AM", "4:30 AM", "4:00 AM", "3:30 AM", "3:00 AM", "2:30 AM", "2:00 AM", "1:30 AM", "1:00 AM", "12:30 AM", "12 AM" ]);
     const [widthArray, setWidthArray] = useState([53,48,50,48,50,48,48,48]);
 
-    const { form_full, scrollview, dataWrapper, HeadStyle, centeredText, row, button } = styles;
+    const { form_full, scrollview, dataWrapper, HeadStyle, centeredText, row, button, tableHeaderText } = styles;
 
     useEffect(() => {
         if (loading)
@@ -162,7 +162,7 @@ export default function SetEventAvail({ navigation, route }) {
                                 <Button
                                     onPress={() => SendWeek()}
                                     title="Submit"
-                                    color="#841584"
+                                    color="#e29476"
                                     style={button}
                                 /> 
                             </View>
@@ -170,15 +170,20 @@ export default function SetEventAvail({ navigation, route }) {
                     <ScrollView vertical={true}>                       
                         
                         <View>
-                            <Table borderStyle={{borderWidth: 1, borderColor: '#485063'}}>
-                                <Row data={["Time","Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={HeadStyle} textStyle={centeredText}/>
+                            <Table borderStyle={{ borderWidth: 1, borderColor: '#d4d4d4'}}>
+                                <Row data={["Time", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} widthArr={widthArray} style={HeadStyle} textStyle={tableHeaderText}/>
                             </Table>
                             <ScrollView style={dataWrapper}>
-                                <Table borderStyle={{borderWidth: 1, borderColor: '#485063'}}>
+                                <Table
+                                    borderStyle={{
+                                        borderWidth: 1,
+                                        borderColor: '#d4d4d4',
+                                    }}
+                                >
                                     <Rows data={availabilityTable} 
                                     style={row}
                                     widthArr={widthArray}
-                                    textStyle={centeredText}/>
+                                        textStyle={tableHeaderText}/>
                                 </Table>
                             </ScrollView>
                         </View>
