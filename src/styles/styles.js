@@ -73,11 +73,11 @@ export default styles = StyleSheet.create({
         fontWeight: '200'
     },
     dataWrapper: {
-        marginTop: -1
+        marginTop: -1,
     },
     row: {
         height: 40,
-        backgroundColor: '#F7F8FA'
+        backgroundColor: '#35405d'
     },
     col: { 
         width: 50, 
@@ -86,7 +86,7 @@ export default styles = StyleSheet.create({
     HeadStyle: { 
         height: 50,
         alignContent: "center",
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#35405d',
     },
     TableText: {
         margin: 10
@@ -118,5 +118,10 @@ export default styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 18,
         color: 'red',
+    },
+    tableHeaderText: {
+        textAlign: 'center',
+        alignItems: 'center',
+        color: '#f2d49b',
     }
 })
