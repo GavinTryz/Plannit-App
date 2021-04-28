@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import WeekCell from "./WeekCell"
+import styles from "../styles/styles"
 
 import jwt_decode from 'jwt-decode';
 
@@ -36,6 +37,12 @@ export default function SetEventAvail({ navigation, route }) {
         var jwtToken = await AsyncStorage.getItem('@jwt');
         var userID = jwt_decode(jwtToken).userId;
 
+        console.log("jwtToken");
+        console.log(jwtToken);
+
+        console.log("UserID");
+        console.log(userID);
+
         var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/getWeek', {
             userID: userID,
             jwtToken: jwtToken,
@@ -46,10 +53,12 @@ export default function SetEventAvail({ navigation, route }) {
         }
 
         if (response.data.error) {
+            console.log(response.data.error);
             setError(response.data.error);
         } 
         else
         {
+            console.log("response");
             console.log(response.data.week);
             var rows = 48;
             var cols = 7;
@@ -68,8 +77,8 @@ export default function SetEventAvail({ navigation, route }) {
             }
 
 			setAvailability(newTable);
-
-            
+            console.log("newTable");
+            console.log(newTable);
             createTable(newTable);
         }
 
@@ -84,7 +93,7 @@ export default function SetEventAvail({ navigation, route }) {
 
         console.log("this worked");
 
-        var availabilityTable = Array.from({ length: rows }, () => 
+        var table = Array.from({ length: rows }, () => 
             Array.from({ length: cols }, () => false)
             );
 
@@ -92,7 +101,7 @@ export default function SetEventAvail({ navigation, route }) {
         {
             for (var j = 0; j < cols; j++)
             {
-                availabilityTable[i][j] = availability[j][i];
+                table[i][j] = availability[j][i];
             }
         }
 
@@ -100,7 +109,7 @@ export default function SetEventAvail({ navigation, route }) {
             jwtToken: jwtToken,
             eventID: eventID,
             eventName: eventName,
-            availability: availabilityTable,
+            availability: table,
         });
 
         if (response.data.jwtToken) {
@@ -133,7 +142,11 @@ export default function SetEventAvail({ navigation, route }) {
             {
                 table[i][j+1] = <WeekCell week={inputTable} row={i} col={j} setWeek={setAvailability}/>
             }
+
         }
+
+        console.log("displayTable");
+        console.log(table);
 
         setAvailabilityTable(table);
     }
@@ -144,20 +157,17 @@ export default function SetEventAvail({ navigation, route }) {
         <View>
             {
                 !loading &&
-                <View style={form_full}>
-                    <ScrollView contentContainerStyle={scrollview} vertical={true}>
-                        
+                <View>
+                            <View style = {{width: "100%"}}>
+                                <Button
+                                    onPress={() => SendWeek()}
+                                    title="Submit"
+                                    color="#841584"
+                                    style={button}
+                                /> 
+                            </View>
 
-                <View style={{flexDirection: "row"}}>
-                    <View style = {{width: "100%"}}>
-                        <Button
-                            onPress={() => SendWeek()}
-                            title="Submit"
-                            color="#841584"
-                            style={button}
-                        /> 
-                    </View>
-                </View>
+                    <ScrollView vertical={true}>                       
                         
                         <View>
                             <Table borderStyle={{borderWidth: 1, borderColor: '#485063'}}>

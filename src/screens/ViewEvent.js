@@ -40,6 +40,8 @@ export default function ViewEvent ({navigation, route}) {
 	const ViewEvent = async () => {
 		var jwtToken = await AsyncStorage.getItem('@jwt');
 
+		console.log(_id);
+
         var response = await axios.post('https://plannit-cop4331.herokuapp.com/api/viewEvent', {
             eventID: _id,
 			jwtToken: jwtToken

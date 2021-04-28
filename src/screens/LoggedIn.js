@@ -121,9 +121,9 @@ export default function LoggedIn ({navigation}) {
                 <View style={styles.myEventListContainer}>
                     { myEvents.map((item) => {
                         return(
-                            <View key={item._id}>
+                            <View key={item.eventID}>
                                 <TouchableOpacity
-                                    onPress={() => navigation.navigate('View Event', item)}
+                                    onPress={() => navigation.navigate('View Event', {_id: item.eventID})}
                                     style={{
                                     }}
                                 >
