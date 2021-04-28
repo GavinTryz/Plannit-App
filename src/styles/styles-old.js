@@ -77,7 +77,6 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         justifyContent: 'center',
-        
     }, 
     horizontalRow: {
         flexDirection: 'row',
@@ -99,10 +98,6 @@ export default styles = StyleSheet.create({
 		backgroundColor: '#E5E5E5',
 		fontSize: 24
 	},
-
-
-
-
     tableContainer: { 
         flex: 1, 
         padding: 16, 

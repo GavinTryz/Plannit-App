@@ -6,7 +6,7 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 
 import jwt_decode from 'jwt-decode';
 
-import { Input, TextLink, Loading, Button } from '../components/common';
+import { Button, section_LoggedIn } from '../components/common';
 
 export default function SetEventAvail({ navigation, route }) {
     const { jwt, eventID, eventName } = route.params;
@@ -72,25 +72,25 @@ export default function SetEventAvail({ navigation, route }) {
     return (
         <View style={form_full}>
             <ScrollView contentContainerStyle={scrollview}>
-                <RadioForm
-                    radio_props={radio_props}
-                    initial={0}
-                    labelHorizontal={false}
-                    onPress={val => setEnablecustom(val)}
-                />
-                {
-                    enableCustom ? (
-                        <Text>Availability Input goes here</Text>
-                    ) : (
-                        <Text></Text>
-                    )
-                }
-                <Button
-                    onPress={Submit}
-                    title="Submit"
-                    color="#841584"
-                    accessibilityLabel="Submit button"
-                />
+                <Text />
+                <View style={section_LoggedIn}>
+                    <RadioForm
+                        radio_props={radio_props}
+                        initial={0}
+                        labelHorizontal={true}
+                        onPress={val => setEnablecustom(val)}
+                    />
+                    {
+                        enableCustom ? (
+                            <Text>Availability Input goes here</Text>
+                        ) : (
+                            <Text></Text>
+                        )
+                    }
+                </View>
+                <Button onPress={Submit}>
+                    Submit
+                </Button>
             </ScrollView>
         </View>
     );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Button } from 'react-native';
 
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import jwt_decode	from 'jwt-decode';
 import axios		from 'axios';
 
-import { Button }	from '../components/common';
+//import { Button }	from '../components/common';
 import styles		from "../styles/styles"
 
 export default function ViewEvent ({navigation, route}) {
@@ -22,7 +22,7 @@ export default function ViewEvent ({navigation, route}) {
 	const [eventTime,			setEventTime]			= useState([]);
 	const [availabilityTable,	setAvailabilityTable]	= useState([[]]);
 
-	const { button } = styles;
+	const { button, form_full } = styles;
 
 	useEffect(() => {
 		ViewEvent();
@@ -156,7 +156,7 @@ export default function ViewEvent ({navigation, route}) {
     // Connect to the viewEvent API, and store all the data about the event with the id "key"
 
 	return (
-		<View>
+		<View style={form_full}>
             <View style={{flexDirection: "row"}}>
                 <View style = {{width: "50%"}}>
                     <Button
@@ -177,7 +177,9 @@ export default function ViewEvent ({navigation, route}) {
             </View>
 
 			<ScrollView horizontal={true}>
-                    <View>
+				<View style={{
+					alignContent: "center",
+				}}>
                         <Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
                             <Row data={["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]} style={styles.HeadStyle} textStyle={styles.TableText}/>
                         </Table>

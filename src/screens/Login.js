@@ -68,19 +68,29 @@ export default function Login ({navigation}) {
                     {error}
                 </Text>
 
-                <Button onPress={RequestLogin}> Login </Button>
+                <Button onPress={RequestLogin}>
+                    Login
+                </Button>
             </View>
 
             <View style={centeredText}>
-                <TextLink onPress={() => navigation.navigate('Send Reset')}>
+                <Text style={errorTextStyle}>
+                    {error}
+                </Text>
+                <Text/>
+                <Text
+                    onPress={() => navigation.navigate('Send Reset')}
+                    style={textLink}
+                >
                     Forgot Password
-                </TextLink>
-            </View>
-
-            <View style={centeredText}>
-                <TextLink onPress={() => navigation.navigate('Register')}>
+                </Text>
+                <Text/>
+                <Text
+                    onPress={() => navigation.navigate('Register')}
+                    style={textLink}
+                >
                     Don't have an account? Register!
-                </TextLink>
+                </Text>
             </View>
         </View>
     );
