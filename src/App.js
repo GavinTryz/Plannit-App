@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-import jwt_decode from 'jwt-decode';
-
 import { NavigationContainer }  from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { Loading } from './components/common/';
-
 import Register      from './screens/Register';
 import Login         from './screens/Login';
+import SendReset     from './screens/SendReset';
+import ResetPassword from './screens/ResetPassword';
 import LoggedIn      from './screens/LoggedIn';
 import NewEvent      from './screens/NewEvent';
 import ListEvents    from './screens/ListEvents';
-import Notifications from './screens/Notifications';
 import MyWeek        from './screens/MyWeek';
-import SetEventAvail from './screens/SetEventAvail'
+import TestScreen    from './screens/TestScreen';
+import ViewEvent     from './screens/ViewEvent';
+import InviteUsers   from './screens/InviteUsers';
 
 const Stack = createStackNavigator();
 
 function App({navigation}) {
-    const [userID,      setUserID]      = React.useState(-1);
-    const [firstname,   setFirstname]   = React.useState('');
-    const [lastname,    setLastname]    = React.useState('');
     const [jwtToken,    setJwtToken]    = React.useState(null);
     //const [firstRun,    setFirstrun]    = React.useState(true)
 
@@ -55,9 +49,9 @@ function App({navigation}) {
     return (
         <NavigationContainer>
             { jwtToken !== null ? (
-                <Stack.Navigator initialRouteName = 'Home'>
+                <Stack.Navigator initialRouteName = 'My Events'>
                     <Stack.Screen 
-                        name='Home' 
+                        name='My Events' // Previously called Home
                         component={LoggedIn} 
                     />
                     <Stack.Screen 
@@ -65,30 +59,38 @@ function App({navigation}) {
                         component={NewEvent} 
                     />
                     <Stack.Screen 
-                        name='List Events' 
-                        component={ListEvents} 
+                        name='View Event' 
+                        component={ViewEvent} 
                     />
                     <Stack.Screen 
                         name='My Typical Week' 
                         component={MyWeek} 
-                    />
-                    <Stack.Screen 
-                        name='Notifications' 
-                        component={Notifications} 
                     />
                 </Stack.Navigator>
             ) : (
                 <Stack.Navigator initialRouteName = 'Login'>
                     <Stack.Screen 
+                        name='TestScreen'
+                        component={TestScreen} 
+                    />
+                    <Stack.Screen 
                         name='Login'
                         component={Login} 
                     />
                     <Stack.Screen 
-                        name='Register' 
+                        name='Register'
                         component={Register} 
                     />
                     <Stack.Screen 
-                        name='Home' 
+                        name='Send Reset' 
+                        component={SendReset} 
+                    />
+                    <Stack.Screen 
+                        name='Reset Password' 
+                        component={ResetPassword} 
+                    />
+                    <Stack.Screen 
+                        name='My Events' // Previously called Home
                         component={LoggedIn} 
                     />
                     <Stack.Screen 
@@ -96,16 +98,16 @@ function App({navigation}) {
                         component={NewEvent} 
                     />
                     <Stack.Screen 
-                        name='List Events' 
-                        component={ListEvents} 
+                        name='View Event' 
+                        component={ViewEvent} 
                     />
                     <Stack.Screen 
                         name='My Typical Week' 
                         component={MyWeek} 
                     />
                     <Stack.Screen 
-                        name='Set Event Availability' 
-                        component={SetEventAvail}
+                        name='Invite Users' 
+                        component={InviteUsers} 
                     />
                 </Stack.Navigator>
             )}  

@@ -33,31 +33,38 @@ export default function NewEvent ({navigation}) {
 
 		var daysOfWeek = [];
 
-		if (monday) {
+		if (monday)
+		{
 			daysOfWeek.push("Monday");
 		}
 
-		if (tuesday) {
+		if (tuesday)
+		{
 			daysOfWeek.push("Tuesday");
 		}
-
-		if (wednesday) {
+		
+		if (wednesday)
+		{
 			daysOfWeek.push("Wednesday");
 		}
-
-		if (thursday) {
+		
+		if (thursday)
+		{
 			daysOfWeek.push("Thursday");
 		}
-
-		if (friday) {
+		
+		if (friday)
+		{
 			daysOfWeek.push("Friday");
 		}
-
-		if (saturday) {
+		
+		if (saturday)
+		{
 			daysOfWeek.push("Saturday");
 		}
 
-		if (sunday) {
+		if (sunday)
+		{
 			daysOfWeek.push("Sunday");
 		}
 

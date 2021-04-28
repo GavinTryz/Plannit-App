@@ -27,8 +27,10 @@ export default function Login ({navigation}) {
         
         if (response.data.jwtToken) {
             await AsyncStorage.setItem('@jwt', response.data.jwtToken); 
-            navigation.navigate('Home');
-        } else {
+            navigation.navigate('My Events'); // Previously called Home
+        }
+        else
+        {
             setError(response.data.error);
         }
     }
@@ -74,6 +76,11 @@ export default function Login ({navigation}) {
                     :
                     <Loading size={'large'} />
                 }
+            </View>
+            <View style={centeredText}>
+                <TextLink onPress={() => navigation.navigate('Send Reset')}>
+                    Forgot Password
+                </TextLink>
             </View>
             <View style={centeredText}>
                 <TextLink onPress={() => navigation.navigate('Register')}>
